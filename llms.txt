@@ -26,7 +26,7 @@ Secondary palette:
 
 ## Design tokens
 
-CSS custom properties: --lh-body, --charcoal, --juniper, --white, --page-bg, --brand-accent, --brand-accent-rgb, --dark-blue, --fern, --fern-rgb, --cornflower, --salt, --jam, --jam-rgb, --silk, --honeydew, --gray
+CSS custom properties: --lh-body, --charcoal, --juniper, --white, --page-bg, --brand-accent, --brand-accent-rgb, --dark-blue, --fern, --fern-rgb, --cornflower, --salt, --jam, --jam-rgb, --highlight, --silk, --honeydew, --gray
 
 ## How to extract brand data
 
