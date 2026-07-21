@@ -36,7 +36,6 @@ const SECTIONS: Record<string, React.LazyExoticComponent<() => React.ReactElemen
   'dataviz-charts':     lazy(() => import('./sections/dataviz/DataVizCharts')),
   'app-intro':          lazy(() => import('./sections/applications/AppIntro')),
   'app-examples':       lazy(() => import('./sections/applications/AppExamples')),
-  'icon-intro':         lazy(() => import('./sections/iconography/IconIntro')),
   'print-specs':        lazy(() => import('./sections/print/PrintSpecs')),
 }
 

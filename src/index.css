@@ -520,7 +520,7 @@ body.print-active .print-book-page { overflow: hidden; }
   height: auto;
 }
 
-/* ── Intro layout (vi-intro, icon-intro) ────────────────────────── */
+/* ── Intro layout (vi-intro) ─────────────────────────────────────── */
 .intro-layout {
   display: flex;
   flex-direction: column;

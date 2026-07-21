@@ -82,8 +82,10 @@ function isNeutral(hex: string, name: string): boolean {
     ['black', 'white'].includes(name.toLowerCase())
 }
 
+// Juniper is the type colour, not a fill, so it has no tint/shade ramp.
 const colors = [...brand.colors.primary, ...brand.colors.secondary]
   .filter(c => !isNeutral(c.hex, c.name))
+  .filter(c => c.name !== 'Juniper')
 
 // ── Component ─────────────────────────────────────────────────────
 

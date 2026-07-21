@@ -226,8 +226,10 @@ const brand: BrandConfig = {
   // despite carrying the logo.
   colors: {
     primary: [
-      { name: 'Fern',       hex: '#324625', textColor: '#FCFBF0' },
-      { name: 'Cornflower', hex: '#A4C3FA', textColor: '#283F1A' },
+      { name: 'Fern',       hex: '#324625', textColor: '#FCFBF0',
+        note: 'For type, use Juniper #283F1A: the darker version of this green.' },
+      { name: 'Cornflower', hex: '#A4C3FA', textColor: '#283F1A',
+        note: 'For colour highlights in headlines, use #6CA1F0: a slightly darker Cornflower.' },
       { name: 'Salt',       hex: '#FCFBF0', textColor: '#283F1A', outline: '1px solid #E5E2D6' },
     ],
     secondary: [
@@ -276,7 +278,6 @@ const brand: BrandConfig = {
   // grounds (Fern, Jam) take a light mark, light grounds take a dark mark, and
   // Fern and Jam are never paired with each other.
   colorPairings: [
-    { bg: 'Juniper',    logo: 'logo-full-salt.svg' },
     { bg: 'Fern',       logo: 'logo-full-salt.svg' },
     { bg: 'Cornflower', logo: 'logo-full-jam.svg' },
     { bg: 'Salt',       logo: 'logo-full-jam.svg' },
@@ -360,10 +361,6 @@ const brand: BrandConfig = {
         { label: 'Introduction', id: 'app-intro' },
         { label: 'Examples',     id: 'app-examples' },
       ],
-    },
-    {
-      group: 'Iconography',
-      items: [{ label: 'Introduction', id: 'icon-intro' }],
     },
     {
       group: 'Print & export',

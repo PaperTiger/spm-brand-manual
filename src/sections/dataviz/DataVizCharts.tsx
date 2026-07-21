@@ -27,27 +27,26 @@ function donutSegment(
 
 
 // ── Series colours ────────────────────────────────────────────────
-// Drawn from the colour-pathway ramps, then contrast-checked two ways:
-// every series clears 3:1 against its own chart ground, and no two
-// ADJACENT series sit closer than 1.9:1 to each other. Ordering matters:
-// swapping two entries can break the adjacency guarantee.
-//
-//   light ground (white)   min adjacent 2.73
-//   dark ground  (Fern)    min adjacent 1.95
+// The brand palette, used straight. An earlier pass pushed each colour down
+// its pathway to force contrast against white, which drained the saturation
+// out of them (Salt and Silk landed at 3-4% and read as plain grey). Chart
+// colour reads as brand colour here, so the palette wins; the order
+// alternates dark and light so adjacent series stay separable.
 const SERIES_LIGHT = [
-  '#748AB2', // Cornflower 600  3.49:1 on white
-  '#324625', // Fern 400       10.30:1
-  '#86857F', // Salt 700        3.70:1
-  '#59173E', // Jam 400        12.99:1
-  '#77726E', // Silk 700        4.75:1
+  '#59173E', // Jam
+  '#A4C3FA', // Cornflower
+  '#324625', // Fern
+  '#D9DB8C', // Honeydew
+  '#E1D7D0', // Silk
 ]
 
+// On the Fern card every series has to read light.
 const SERIES_DARK = [
-  '#D9E6FD', // Cornflower 200  8.19:1 on Fern
-  '#B99EAE', // Jam 200         4.20:1
-  '#FCFBF0', // Salt 400        9.91:1
-  '#9A9B63', // Honeydew 600    3.55:1
-  '#E1D7D0', // Silk 400        7.28:1
+  '#A4C3FA', // Cornflower
+  '#FCFBF0', // Salt
+  '#D9DB8C', // Honeydew
+  '#E1D7D0', // Silk
+  '#B99EAE', // Jam 200
 ]
 
 // ── Bar chart data ────────────────────────────────────────────────
@@ -277,8 +276,8 @@ export default function DataVizCharts() {
             </div>
             <div style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 11, color: "#283F1A",
               marginTop: 8, lineHeight: 1.4 }}>
-              Q5 uses Silk 700 <span style={{ fontFamily: "monospace", background: "#F3F3F3",
-                padding: "1px 5px", borderRadius: 2 }}>#5C705C</span>: 5.5:1 contrast, WCAG AA
+              Series run Jam, Cornflower, Fern, Honeydew, Silk: the palette straight,
+              alternating dark and light so adjacent bars stay separable.
             </div>
           </div>
           <div>
@@ -291,8 +290,8 @@ export default function DataVizCharts() {
             </div>
             <div style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 11, color: "#283F1A",
               marginTop: 8, lineHeight: 1.4 }}>
-              Q5 uses Silk 400 <span style={{ fontFamily: "monospace", background: "#F3F3F3",
-                padding: "1px 5px", borderRadius: 2 }}>#E1D7D0</span>: works on dark backgrounds
+              On a Fern card every series steps to a light value: Cornflower, Salt,
+              Honeydew, Silk, and a Jam tint.
             </div>
           </div>
         </div>

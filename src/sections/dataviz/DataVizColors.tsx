@@ -5,41 +5,38 @@ const t = brand.tokens
 // The stylesheet does not specify a data visualisation palette. This sequence
 // extends the brand palette, ordered so that adjacent series stay separable:
 // it alternates dark and light rather than running the two darks together.
-// Series colours come from the colour-pathway ramps rather than the raw
-// palette: several brand colours are too light to carry a data series on a
-// white ground. Each entry is contrast-checked against its chart ground, and
-// adjacent entries are kept at least 1.9:1 apart from one another.
+// The brand palette, used straight, so a chart reads as SPM at a glance.
 const sequence = [
   {
-    n: '01', name: 'Cornflower 600', hex: '#748AB2', text: '#fff',
-    note: 'Primary series. Cornflower 400 is far too light for a white ground (1.8:1), so the 600 step carries it.',
+    n: '01', name: 'Jam', hex: '#59173E', text: '#FCFBF0',
+    note: 'Primary series. Anchors the chart and takes the most important metric.',
   },
   {
-    n: '02', name: 'Fern 400', hex: '#324625', text: '#fff',
-    note: 'Second series: the base brand green, 10.3:1 on white.',
+    n: '02', name: 'Cornflower', hex: '#A4C3FA', text: '#283F1A',
+    note: 'Second series. The strongest contrast against Jam in the palette.',
   },
   {
-    n: '03', name: 'Salt 700', hex: '#86857F', text: '#fff',
-    note: 'Third series. Salt itself is a background colour, so the 700 step is used for data.',
+    n: '03', name: 'Fern', hex: '#324625', text: '#FCFBF0',
+    note: 'Third series: use for charts requiring three or more distinct series.',
   },
   {
-    n: '04', name: 'Jam 400', hex: '#59173E', text: '#fff',
-    note: 'Fourth series: the base brand plum, 13.0:1 on white.',
+    n: '04', name: 'Honeydew', hex: '#D9DB8C', text: '#283F1A',
+    note: 'Fourth series. Limit charts to five colour-coded series.',
   },
   {
-    n: '05', name: 'Silk 700', hex: '#77726E', text: '#fff',
-    note: 'Fifth series. Limit charts to five colour-coded series; beyond that, use opacity steps of one hue.',
+    n: '05', name: 'Silk', hex: '#E1D7D0', text: '#283F1A',
+    note: 'Fifth series. Beyond five, use opacity steps of a single hue.',
   },
   {
-    n: '06', name: 'Mid Gray', hex: '#9CA3AF', text: '#283F1A',
-    note: 'Axes, gridlines, and reference lines only. Never use as a data series.',
+    n: '06', name: 'Mid Gray', hex: '#9CA3AF', text: '#000',
+    note: 'Axes, gridlines, and reference lines only. Never a data series.',
   },
 ]
 
 const rules = [
   {
-    heading: 'Start with Cornflower 600',
-    body: 'Cornflower 600 always takes the first data series, anchoring the chart and drawing the eye to the most important metric.',
+    heading: 'Start with Jam',
+    body: 'Jam always takes the first data series, anchoring the chart and drawing the eye to the most important metric.',
   },
   {
     heading: 'Maximum five series',
@@ -134,7 +131,7 @@ export default function DataVizColors() {
         </div>
         <div style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 12, color: "#283F1A",
           marginTop: 4 }}>
-          100% → 80% → 60% → 40% → 20% → 10% opacity of Cornflower 600
+          100% → 80% → 60% → 40% → 20% → 10% opacity of Jam
         </div>
       </div>
     </div>
