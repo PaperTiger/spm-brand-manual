@@ -189,9 +189,9 @@ const brand: BrandConfig = {
     salt:               '#FCFBF0',
     jam:                '#59173E',
     'jam-rgb':          '89, 23, 62',
-    // Headline emphasis is Cornflower. The homepage comp draws it a shade
-    // deeper (#6CA0F0) if the comp is ever the reference rather than the palette.
-    'highlight-as-drawn': '#6CA0F0',
+    // Headline emphasis. A distinct blue, deeper and more saturated than
+    // Cornflower, used only for highlighted phrases in display type.
+    highlight:          '#6CA1F0',
     silk:               '#E1D7D0',
     honeydew:           '#D9DB8C',
     gray:               '#F3F3F3',

@@ -4,10 +4,9 @@ const t = brand.tokens
 const SANS = `var(--display-font, 'Urbanist'), sans-serif`
 const SERIF = `'Old Standard TT', Georgia, serif`
 
-// The highlight is Cornflower. The homepage comp draws it a shade deeper
-// (#6CA0F0); swap t.cornflower for that value here if the comp is the
-// reference rather than the palette.
-const HL = t.cornflower
+// A dedicated highlight blue (#6CA1F0), deeper and more saturated than
+// Cornflower. It exists only for this treatment.
+const HL = t.highlight
 
 /** Small Old Standard caption with its rule, as the homepage sets it. */
 function Eyebrow({ children }: { children: React.ReactNode }) {
@@ -42,7 +41,7 @@ export default function TypeEmphasis() {
       <div className="section-label">Typography</div>
       <h2 className="section-title">Emphasis &amp; highlight</h2>
       <p className="section-intro">
-        A statement headline can lift two or three key phrases into Cornflower. It is the brand's
+        A statement headline can lift two or three key phrases into the highlight blue. It is the brand's
         way of making a long sentence scannable: the highlighted phrases should read as a summary
         on their own. Use it on hero statements and section openers, never in body copy.
       </p>
@@ -54,7 +53,7 @@ export default function TypeEmphasis() {
       </div>
       <p style={{ fontFamily: SANS, fontWeight: 500, fontSize: 12.5, lineHeight: 1.4, color: '#4D4D4D', margin: '0 0 48px' }}>
         The full treatment: an Old Standard italic caption with a rule, then an Urbanist headline
-        in Juniper with the key phrases in Cornflower.
+        in Juniper with the key phrases in the highlight blue.
       </p>
 
       {/* Anatomy */}
@@ -65,7 +64,7 @@ export default function TypeEmphasis() {
         <ol style={{ fontFamily: SANS, fontWeight: 500, fontSize: 15, lineHeight: 1.4, color: '#333', maxWidth: 620, paddingLeft: 20, margin: 0 }}>
           <li><strong>Caption.</strong> Two or three words in Old Standard TT italic, followed by a hairline rule.</li>
           <li><strong>Headline.</strong> Urbanist 600 in Juniper, sentence case, centred.</li>
-          <li><strong>Highlight.</strong> Two or three short phrases in Cornflower. Never a whole clause.</li>
+          <li><strong>Highlight.</strong> Two or three short phrases in <code style={{ fontFamily: 'monospace' }}>#6CA1F0</code>. Never a whole clause.</li>
         </ol>
       </div>
 
@@ -79,7 +78,7 @@ export default function TypeEmphasis() {
         </div>
         <p style={{ fontFamily: SANS, fontWeight: 500, fontSize: 12.5, lineHeight: 1.4, color: '#4D4D4D', margin: '10px 0 0' }}>
           The treatment reverses cleanly: a Salt headline on Juniper, Fern, or Jam, with the same
-          Cornflower highlights. This is where Cornflower is strongest.
+          highlight blue. This is where it reads strongest.
         </p>
       </div>
 
@@ -103,10 +102,10 @@ export default function TypeEmphasis() {
             Take care
           </div>
           <div style={{ fontFamily: SANS, fontWeight: 500, fontSize: 14, lineHeight: 1.4, color: 'var(--charcoal)' }}>
-            Cornflower is a light colour, so it carries much less contrast against Salt than the
-            Juniper it sits next to. Keep it to large display type where the shape of the word
-            does the work, and check it in context before publishing. On a dark ground it is far
-            stronger, and that is where this treatment reads best.
+            The highlight blue is lighter than the Juniper it sits beside, so it carries less
+            contrast against a Salt ground. Keep it to large display type where the shape of the
+            word does the work, and check it in context before publishing. On a dark ground it is
+            far stronger, and that is where this treatment reads best.
           </div>
         </div>
       </div>
