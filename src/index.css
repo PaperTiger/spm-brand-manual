@@ -134,6 +134,33 @@ body.print-active .print-book-page { overflow: hidden; }
 .page li { margin-bottom: 6px; }
 .page li::marker { color: var(--brand-accent, #59173E); }
 
+/* ── Applied-branding example grid ─────────────────────────────────
+   A 12-column grid mirroring the stylesheet's applied-branding page.
+   Each figure carries --span-lg / --span-md and collapses to full width
+   on small screens. */
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 40px 24px;
+}
+.app-grid > figure {
+  margin: 0;
+  min-width: 0;                       /* let wide images shrink inside the track */
+  grid-column: span var(--span-lg, 12);
+}
+@media (max-width: 1100px) {
+  .app-grid > figure { grid-column: span var(--span-md, 12); }
+}
+@media (max-width: 640px) {
+  .app-grid { gap: 32px 0; }
+  .app-grid > figure { grid-column: span 12; }
+}
+.app-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* ── Section / page ────────────────────────────────────────────── */
 .page {
   padding: 20px 20px 48px;

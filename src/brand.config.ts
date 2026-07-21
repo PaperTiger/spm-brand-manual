@@ -256,7 +256,7 @@ const brand: BrandConfig = {
       'banner-symbol-masks.webp',
       'slide-our-culture.webp',
       'campaign-pair.webp',
-      'campaign-triptych.webp',
+      'campaign-pair-dont.webp',
       'grid-swoosh-eye.webp',
     ],
     pattern: [
