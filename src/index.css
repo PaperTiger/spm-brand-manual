@@ -187,7 +187,14 @@ body.print-active .print-book-page { overflow: hidden; }
   font-size: clamp(64px, 17vw, 232px);
   font-weight: 550;
   letter-spacing: var(--ts-display-xl-ls, -0.03em);
-  line-height: var(--ts-display-xl-lh, 1);
+  /* The scale's 100% leading is set for a single-font block. This lockup
+     stacks two faces at different sizes, and each line box carries internal
+     leading the ink never fills, so at 100% the optical gap measured ~31px
+     against a 159px cap. 0.86 closes that to ~8px without the serif's "l"
+     ascender colliding with the line above (it overlaps below ~0.82). Both
+     lines share the value, and the two clamps stay in proportion, so the
+     gap scales with the viewport. */
+  line-height: 0.86;
 }
 
 /* "manual" — Old Standard TT italic. The serif track runs larger than its
@@ -198,7 +205,7 @@ body.print-active .print-book-page { overflow: hidden; }
   font-size: clamp(72px, 19vw, 260px);
   font-weight: 400;
   letter-spacing: -0.07em;
-  line-height: var(--ts-display-xl-lh, 1);
+  line-height: 0.86;
 }
 
 .cover-meta {
