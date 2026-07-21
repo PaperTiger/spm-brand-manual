@@ -28,7 +28,7 @@ const items: ExampleItem[] = [
 export default function Symbols() {
   return (
     <div className="page">
-      <div className="section-label">Symbols</div>
+      <div className="section-label">Symbols &amp; patterns</div>
       <h2 className="section-title">Brand symbols</h2>
       <p className="section-intro">
         Five symbols drawn from the brand's own typography: the comma from the logo mark,

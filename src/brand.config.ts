@@ -260,11 +260,18 @@ const brand: BrandConfig = {
       'grid-swoosh-eye.webp',
     ],
     pattern: [
+      'logo-shape-noise-gradient.webp',
       'symbol-pattern-cornflower.webp',
       'gradient-salt-cornflower.webp',
-      'logo-shape-noise-gradient.webp',
-      'testimonial-card-jam.webp',
       'headline-mixed-serif.webp',
+      'testimonial-card-jam.webp',
+      // Colourways of the symbol repeat, in the stylesheet's order.
+      'pattern-salt-tonal.webp',
+      'pattern-jam-cornflower.webp',
+      'pattern-fern-honeydew.webp',
+      'pattern-cornflower-fern.webp',
+      'pattern-honeydew-fern.webp',
+      'pattern-silk-fern.webp',
     ],
     symbols: [
       'symbol-set-overview.webp',
@@ -342,7 +349,7 @@ const brand: BrandConfig = {
       ],
     },
     {
-      group: 'Symbols',
+      group: 'Symbols & patterns',
       items: [
         { label: 'Brand symbols',   id: 'symbols' },
         { label: 'Pattern & texture', id: 'pattern' },

@@ -161,6 +161,34 @@ body.print-active .print-book-page { overflow: hidden; }
   height: auto;
 }
 
+/* ── Justified example row ─────────────────────────────────────────
+   The stylesheet sets its pattern examples in equal-height rows where
+   each item's width is proportional to its aspect ratio, rather than in
+   fixed columns. flex-grow carries the ratio so the row fills exactly. */
+.just-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+.just-row > figure {
+  margin: 0;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+.just-row > figure .frame {
+  flex: 1;
+  display: flex;
+}
+.just-row img { display: block; width: 100%; height: auto; }
+
+@media (max-width: 640px) {
+  .just-row { display: block; }
+  .just-row > figure { margin-bottom: 32px; }
+}
+
 /* ── Section / page ────────────────────────────────────────────── */
 .page {
   padding: 20px 20px 48px;
