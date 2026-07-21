@@ -7,7 +7,7 @@ const SECTIONS: Record<string, React.LazyExoticComponent<() => React.ReactElemen
   home:                 lazy(() => import('./sections/home/Cover')),
   'vi-intro':           lazy(() => import('./sections/home/ViIntro')),
   'logo-horizontal':    lazy(() => import('./sections/logo/FullLogo')),
-  'logo-stacked':       lazy(() => import('./sections/logo/StackedLogo')),
+  'logo-compact':       lazy(() => import('./sections/logo/CompactLogo')),
   'h-logo-mark':        lazy(() => import('./sections/logo/LogoMark')),
   'logo-avatar':        lazy(() => import('./sections/logo/LogoAvatar')),
   'logo-positioning':   lazy(() => import('./sections/logo/LogoPositioning')),
@@ -24,11 +24,12 @@ const SECTIONS: Record<string, React.LazyExoticComponent<() => React.ReactElemen
   'fg-scale':           lazy(() => import('./sections/typography/TypeScale')),
   'google-fallback':    lazy(() => import('./sections/typography/GoogleFallback')),
   'type-fallback':      lazy(() => import('./sections/typography/SystemFallback')),
+  'type-oldstandard':   lazy(() => import('./sections/typography/OldStandard')),
+  'type-pairing':       lazy(() => import('./sections/typography/TypePairing')),
   'type-avoid':         lazy(() => import('./sections/typography/TypeAvoid')),
-  'photo-intro':        lazy(() => import('./sections/photography/PhotoIntro')),
-  'photo-examples':     lazy(() => import('./sections/photography/PhotoExamples')),
   'photo-dos':          lazy(() => import('./sections/photography/PhotoDos')),
-  'photo-donts':        lazy(() => import('./sections/photography/PhotoDonts')),
+  'symbols':            lazy(() => import('./sections/symbols/Symbols')),
+  'pattern':            lazy(() => import('./sections/symbols/Pattern')),
   'logo-cobranding':    lazy(() => import('./sections/logo/Cobranding')),
   'dataviz-colors':     lazy(() => import('./sections/dataviz/DataVizColors')),
   'dataviz-charts':     lazy(() => import('./sections/dataviz/DataVizCharts')),
@@ -79,7 +80,7 @@ function useBrandTokens() {
     link.type = 'image/svg+xml'
     link.href = brand.meta.coverSealImage
 
-    document.title = `${brand.meta.nameLine1}${brand.meta.nameLine2 ? ' ' + brand.meta.nameLine2 : ''}, Brand Identity`
+    document.title = `${brand.meta.client}, ${brand.meta.title}`
     return () => { document.head.removeChild(style) }
   }, [])
 }
@@ -91,7 +92,7 @@ function MobileHeader({ onOpen, onHome }: { onOpen: () => void; onHome: () => vo
     <header className="mobile-header">
       <button className="hamburger" onClick={onOpen} aria-label="Open menu">
         <svg width="18" height="14" viewBox="0 0 18 14" fill="none">
-          <path d="M0 1h18M0 7h18M0 13h18" stroke="#111" strokeWidth="1.5" strokeLinecap="round"/>
+          <path d="M0 1h18M0 7h18M0 13h18" stroke="#283F1A" strokeWidth="1.5" strokeLinecap="round"/>
         </svg>
       </button>
       <div onClick={onHome} style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
@@ -99,13 +100,13 @@ function MobileHeader({ onOpen, onHome }: { onOpen: () => void; onHome: () => vo
           <img
             src={brand.meta.sidebarLogoImage}
             alt={brand.meta.client}
-            style={{ height: 20, width: 'auto', display: 'block' }}
+            style={{ height: 32, width: 'auto', display: 'block' }}
             onError={() => setLogoError(true)}
           />
         )}
         {(!hasLogo || logoError) && (
           <span style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontWeight: 600, fontSize: 14,
-            letterSpacing: '-0.02em', color: 'var(--charcoal, #111)' }}>
+            letterSpacing: '-0.02em', color: 'var(--charcoal, #283F1A)' }}>
             {brand.meta.nameLine1}{brand.meta.nameLine2 ? ' ' + brand.meta.nameLine2 : ''}
           </span>
         )}
@@ -230,7 +231,7 @@ export default function App() {
       />
 
       <main className="main">
-        <Suspense fallback={<div style={{ padding: 64, fontFamily: `var(--body-font, 'Inter'), sans-serif`, color: '#999' }}>Loading…</div>}>
+        <Suspense fallback={<div style={{ padding: 64, fontFamily: `var(--body-font, 'Urbanist'), sans-serif`, color: 'var(--charcoal, #283F1A)' }}>Loading…</div>}>
           <Section />
         </Suspense>
         <PageNav currentPage={currentPage} onNavigate={navigate} />

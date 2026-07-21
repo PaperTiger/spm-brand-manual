@@ -18,11 +18,22 @@ function hexToCmyk(hex: string) {
   ]
 }
 
-function getBestTextColor(hex: string): string {
+function relLuminance(hex: string): number {
   const [r,g,b] = hexToRgb(hex)
   const lin = (c: number) => { const s=c/255; return s<=0.03928 ? s/12.92 : ((s+0.055)/1.055)**2.4 }
-  const L = 0.2126*lin(r) + 0.7152*lin(g) + 0.0722*lin(b)
-  return L > 0.179 ? '#000000' : '#ffffff'
+  return 0.2126*lin(r) + 0.7152*lin(g) + 0.0722*lin(b)
+}
+
+function ratio(a: string, b: string): number {
+  const [x,y] = [relLuminance(a), relLuminance(b)]
+  return (Math.max(x,y) + 0.05) / (Math.min(x,y) + 0.05)
+}
+
+// Juniper and Salt are the brand's two text values; the brand has no black or
+// pure white. Choose by measured contrast rather than a luminance threshold,
+// which would misjudge mid-tone swatches now that the dark value is Juniper.
+function getBestTextColor(hex: string): string {
+  return ratio(hex, '#283F1A') >= ratio(hex, '#FCFBF0') ? '#283F1A' : '#FCFBF0'
 }
 
 interface Props {
@@ -35,7 +46,7 @@ export default function ColorSwatch({ color }: Props) {
   const [c,m,y,k] = hexToCmyk(color.hex)
   const textColor = getBestTextColor(color.hex)
   const hexVal = color.hex.replace('#','').toUpperCase()
-  const isLight = textColor === '#000000'
+  const isLight = textColor === '#283F1A'
   const pillBg = isLight ? 'rgba(0,0,0,0.14)' : 'rgba(255,255,255,0.15)'
 
   const copyHex = () => {

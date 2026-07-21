@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Converts PNG/JPG images in public/images/photography/ and public/images/applications/
+// Converts PNG/JPG images in public/images/{photography,applications,pattern,symbols}/
 // to WebP at max 1600px wide. Deletes the originals after conversion.
 // Usage: node scripts/convert-images.js
 
@@ -13,7 +13,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = join(__dirname, '..', 'public', 'images')
 
 const SOURCE_EXTS = new Set(['.jpg', '.jpeg', '.png'])
-const DIRS = ['photography', 'applications']
+const DIRS = ['photography', 'applications', 'pattern', 'symbols']
 const MAX_WIDTH = 1600
 
 async function convertDir(dir) {

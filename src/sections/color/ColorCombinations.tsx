@@ -48,7 +48,7 @@ export default function ColorCombinations() {
           const bgToken = colorByName(p.bg)
           if (!bgToken) return null
           const bgHex = bgToken.hex
-          const fgHex = luminance(bgHex) > 0.179 ? '#000000' : '#FFFFFF'
+          const fgHex = contrast(bgHex, '#283F1A') >= contrast(bgHex, '#FCFBF0') ? '#283F1A' : '#FCFBF0'
           const ratio = contrast(bgHex, fgHex)
           const aa  = ratio >= 4.5
           const aaa = ratio >= 7

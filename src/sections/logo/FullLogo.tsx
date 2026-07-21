@@ -6,21 +6,20 @@ import DownloadLogosButton from '../../components/ui/DownloadLogosButton'
 const t = brand.tokens
 
 const combos = [
-  { bg: '#FFFFFF',   label: 'White',           mark: t['primary-blue'], wm: t['charcoal'], inner: '#fff', lbl: '#111111' },
-  { bg: '#F3F3F3',   label: 'Gray',            mark: t['primary-blue'], wm: t['charcoal'], inner: '#fff', lbl: '#111111' },
-  { bg: t['pale-green'], label: 'Lime',       mark: t['charcoal'],      wm: t['charcoal'], inner: '#fff', lbl: '#111111' },
-  { bg: t['primary-blue'], label: 'Violet',   mark: '#fff',             wm: '#fff',        inner: t['primary-blue'], lbl: '#fff' },
-  { bg: t['orange'], label: 'Coral',           mark: '#111',            wm: '#111',        inner: '#fff', lbl: '#fff' },
-  { bg: t['dark-blue'], label: 'Deep Violet', mark: '#fff',             wm: '#fff',        inner: t['primary-blue'], lbl: '#fff' },
-  { bg: '#111111',   label: 'Black',           mark: '#fff',            wm: '#fff',        inner: '#111', lbl: '#fff' },
+  { bg: t.salt,       label: 'Salt',       mark: t.jam,  wm: t.jam,  inner: t.cornflower, lbl: '#283F1A' },
+  { bg: t.cornflower, label: 'Cornflower', mark: t.jam,  wm: t.jam,  inner: t.cornflower, lbl: '#283F1A' },
+  { bg: t.silk,       label: 'Silk',       mark: t.jam,  wm: t.jam,  inner: t.silk,       lbl: '#283F1A' },
+  { bg: t.honeydew,   label: 'Honeydew',   mark: t.fern, wm: t.fern, inner: t.honeydew,   lbl: '#283F1A' },
+  { bg: t.fern,       label: 'Fern',       mark: t.salt, wm: t.salt, inner: t.fern,       lbl: '#FCFBF0' },
+  { bg: t.jam,        label: 'Jam',        mark: t.salt, wm: t.salt, inner: t.jam,        lbl: '#FCFBF0' },
 ]
 
 export default function FullLogo() {
   return (
     <div>
       {/* Hero header */}
-      <div className="logo-hero" style={{ background: t['dark-blue'] }}>
-        <FullLogoSvg markFill="#fff" wordmarkFill="#fff" innerTextFill={t['primary-blue']} style={{ maxHeight: 56, width: 'auto' }} />
+      <div className="logo-hero" style={{ background: t.jam }}>
+        <FullLogoSvg markFill={t.salt} wordmarkFill={t.salt} innerTextFill={t.jam} style={{ maxHeight: 56, width: 'auto' }} />
       </div>
 
       <div className="page">
@@ -35,8 +34,8 @@ export default function FullLogo() {
 
         {/* Clearspace */}
         <div className="content-block">
-          <h3 style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontWeight: 500, fontSize: 17, margin: '0 0 12px', color: '#111' }}>Clearspace</h3>
-          <p style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 14, color: '#555', lineHeight: 1.6, marginBottom: 24, maxWidth: 520 }}>
+          <h3 style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontWeight: 500, fontSize: 17, margin: '0 0 12px', color: '#283F1A' }}>Clearspace</h3>
+          <p style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 14, color: '#555', lineHeight: 1.4, marginBottom: 24, maxWidth: 520 }}>
             Maintain a minimum clearspace of <strong>x</strong> on all sides, where x equals half the height of the {brand.meta.client} mark.
           </p>
           <ClearspaceDiagram
@@ -49,7 +48,7 @@ export default function FullLogo() {
 
         {/* Approved color combinations */}
         <div style={{ marginTop: 48, paddingTop: 0 }}>
-          <h3 style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontWeight: 500, fontSize: 17, margin: '0 0 16px', color: '#111' }}>Approved color combinations</h3>
+          <h3 style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontWeight: 500, fontSize: 17, margin: '0 0 16px', color: '#283F1A' }}>Approved color combinations</h3>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 0 }}>
           {combos.map(c => (
             <div key={c.label} style={{ background: c.bg, padding: '28px 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, aspectRatio: '4/3', justifyContent: 'center' }}>

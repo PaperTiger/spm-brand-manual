@@ -1,8 +1,35 @@
 @import "tailwindcss";
 
+/* ── Brand fonts ───────────────────────────────────────────────────
+   Urbanist is aliased off the Fontsource variable files under its plain
+   name. Fontsource registers it as "Urbanist Variable", but brand.config
+   surfaces this string as visible copy ("When Urbanist is unavailable…"),
+   so the family has to read as the brand names it.
+   Old Standard TT needs no alias: its Fontsource family name is correct. */
+@font-face {
+  font-family: 'Urbanist';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('@fontsource-variable/urbanist/files/urbanist-latin-wght-normal.woff2') format('woff2-variations');
+}
+@font-face {
+  font-family: 'Urbanist';
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('@fontsource-variable/urbanist/files/urbanist-latin-wght-italic.woff2') format('woff2-variations');
+}
+
 /* ── Reset ─────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
-body { margin: 0; background: #fff; -webkit-font-smoothing: antialiased; }
+body {
+  margin: 0;
+  background: var(--page-bg, #FCFBF0);
+  -webkit-font-smoothing: antialiased;
+  /* Urbanist has no 400 in the brand spec: 500 Medium is the lightest weight. */
+  font-weight: 500;
+}
 
 @keyframes spin { to { transform: rotate(360deg); } }
 .spin-icon { animation: spin 1s linear infinite; }
@@ -16,7 +43,7 @@ body { margin: 0; background: #fff; -webkit-font-smoothing: antialiased; }
 .sidebar {
   width: 280px;
   flex-shrink: 0;
-  background: #fff;
+  background: var(--page-bg, #FCFBF0);
   border-right: 1px solid #E5E5E5;
   display: flex;
   flex-direction: column;
@@ -31,7 +58,7 @@ body { margin: 0; background: #fff; -webkit-font-smoothing: antialiased; }
 }
 
 .sidebar-logo-wrap {
-  padding: 20px 24px 16px;
+  padding: 24px 24px 20px;
   border-bottom: 1px solid #E5E5E5;
   display: flex;
   align-items: center;
@@ -59,28 +86,28 @@ body { margin: 0; background: #fff; -webkit-font-smoothing: antialiased; }
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #111;
+  color: #283F1A;
   padding: 16px 24px 6px;
 }
 
 .nav-link {
   display: block;
-  font-family: var(--body-font, 'Inter'), sans-serif;
+  font-family: var(--body-font, 'Urbanist'), sans-serif;
   font-size: 13px;
-  font-weight: 400;
-  color: #111;
+  font-weight: 500;
+  color: #283F1A;
   padding: 6px 24px;
   text-decoration: none;
   cursor: pointer;
   transition: color 0.1s, background 0.1s;
   border-left: 3px solid transparent;
 }
-.nav-link:hover { color: var(--primary-blue, #8B3DFF); background: #F8F4FF; }
+.nav-link:hover { color: var(--brand-accent, #59173E); background: #FAF6F8; }
 .nav-link.active {
-  color: var(--primary-blue, #8B3DFF);
-  border-left-color: var(--primary-blue, #8B3DFF);
+  color: var(--brand-accent, #59173E);
+  border-left-color: var(--brand-accent, #59173E);
   font-weight: 500;
-  background: #F8F4FF;
+  background: #FAF6F8;
 }
 .nav-child { padding-left: 36px; font-size: 12px; }
 
@@ -112,7 +139,7 @@ body.print-active .print-book-page { overflow: hidden; }
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--primary-blue, #8B3DFF);
+  color: var(--brand-accent, #59173E);
   margin-bottom: 12px;
 }
 
@@ -121,7 +148,7 @@ body.print-active .print-book-page { overflow: hidden; }
   font-size: clamp(22px, 5.5vw, 34px);
   font-weight: 600;
   letter-spacing: var(--ts-headline-xl-ls, -0.03em);
-  color: var(--charcoal, #111);
+  color: var(--charcoal, #283F1A);
   margin: 0 0 24px;
   line-height: var(--ts-headline-xl-lh, 1);
 }
@@ -131,7 +158,7 @@ body.print-active .print-book-page { overflow: hidden; }
   font-size: 16px;
   letter-spacing: var(--ts-body-l-ls, -0.01em);
   line-height: var(--ts-body-l-lh, var(--lh-body));
-  color: #111;
+  color: #283F1A;
   max-width: 600px;
   margin-bottom: 48px;
 }
@@ -139,7 +166,7 @@ body.print-active .print-book-page { overflow: hidden; }
 /* ── Cover / hero ──────────────────────────────────────────────── */
 .cover {
   min-height: 100dvh;
-  background: var(--primary-blue, #8B3DFF);
+  background: var(--cornflower, #A4C3FA);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -148,13 +175,30 @@ body.print-active .print-book-page { overflow: hidden; }
 }
 
 .cover-heading {
-  font-family: var(--display-font, 'DM Sans'), sans-serif;
-  font-size: clamp(80px, 14vw, 160px);
-  font-weight: 700;
-  letter-spacing: var(--ts-display-xl-ls, -0.04em);
-  line-height: var(--ts-display-xl-lh, 0.88);
-  color: #000;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  color: var(--jam, #59173E);
+}
+
+/* "Brand" — Urbanist, the display weight from the brand scale. */
+.cover-heading-sans {
+  font-family: var(--display-font, 'Urbanist'), sans-serif;
+  font-size: clamp(64px, 17vw, 232px);
+  font-weight: 550;
+  letter-spacing: var(--ts-display-xl-ls, -0.03em);
+  line-height: var(--ts-display-xl-lh, 1);
+}
+
+/* "manual" — Old Standard TT italic. The serif track runs larger than its
+   sans counterpart at every level, and tracks tighter to compensate. */
+.cover-heading-serif {
+  font-family: 'Old Standard TT', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(72px, 19vw, 260px);
+  font-weight: 400;
+  letter-spacing: -0.07em;
+  line-height: var(--ts-display-xl-lh, 1);
 }
 
 .cover-meta {
@@ -162,7 +206,7 @@ body.print-active .print-book-page { overflow: hidden; }
   font-size: 13px;
   letter-spacing: var(--ts-body-m-ls, 0);
   line-height: 1.8;
-  color: #000;
+  color: #283F1A;
 }
 
 .cover-seal {
@@ -171,7 +215,6 @@ body.print-active .print-book-page { overflow: hidden; }
   right: 48px;
   width: clamp(120px, 14vw, 200px);
   height: clamp(120px, 14vw, 200px);
-  opacity: 0.22;
 }
 
 /* ── Color swatches ────────────────────────────────────────────── */
@@ -244,7 +287,7 @@ body.print-active .print-book-page { overflow: hidden; }
 }
 
 .cs-zone {
-  background: rgba(var(--primary-blue-rgb, 139, 61, 255), 0.15);
+  background: rgba(var(--brand-accent-rgb, 89, 23, 62), 0.15);
   padding: var(--cs-x, 36px);
   position: relative;
   display: inline-block;
@@ -252,7 +295,7 @@ body.print-active .print-book-page { overflow: hidden; }
 
 .cs-logo-box {
   background: transparent;
-  border: 1.5px dashed rgba(var(--primary-blue-rgb, 139, 61, 255), 0.45);
+  border: 1.5px dashed rgba(var(--brand-accent-rgb, 89, 23, 62), 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -270,8 +313,8 @@ body.print-active .print-book-page { overflow: hidden; }
   justify-content: center;
   pointer-events: none;
 }
-.cs-dim-v.top    { top: 0;    border-bottom: 1px solid rgba(var(--primary-blue-rgb, 139, 61, 255), 0.20); }
-.cs-dim-v.bottom { bottom: 0; border-top:    1px solid rgba(var(--primary-blue-rgb, 139, 61, 255), 0.20); }
+.cs-dim-v.top    { top: 0;    border-bottom: 1px solid rgba(var(--brand-accent-rgb, 89, 23, 62), 0.20); }
+.cs-dim-v.bottom { bottom: 0; border-top:    1px solid rgba(var(--brand-accent-rgb, 89, 23, 62), 0.20); }
 
 .cs-dim-h {
   position: absolute;
@@ -282,14 +325,14 @@ body.print-active .print-book-page { overflow: hidden; }
   justify-content: center;
   pointer-events: none;
 }
-.cs-dim-h.left  { left: 0;  border-right: 1px solid rgba(var(--primary-blue-rgb, 139, 61, 255), 0.20); }
-.cs-dim-h.right { right: 0; border-left:  1px solid rgba(var(--primary-blue-rgb, 139, 61, 255), 0.20); }
+.cs-dim-h.left  { left: 0;  border-right: 1px solid rgba(var(--brand-accent-rgb, 89, 23, 62), 0.20); }
+.cs-dim-h.right { right: 0; border-left:  1px solid rgba(var(--brand-accent-rgb, 89, 23, 62), 0.20); }
 
 .cs-lbl {
   font-family: var(--display-font, 'DM Sans'), sans-serif;
   font-weight: 700;
   font-size: 10px;
-  color: var(--primary-blue, #8B3DFF);
+  color: var(--brand-accent, #59173E);
   background: rgba(255,255,255,0.9);
   padding: 1px 5px;
   border-radius: 2px;
@@ -314,7 +357,7 @@ body.print-active .print-book-page { overflow: hidden; }
   font-size: 11px;
   padding: 2px 7px;
   border-radius: 2px;
-  background: rgba(var(--primary-blue-rgb, 139, 61, 255), 0.40);
+  background: rgba(var(--brand-accent-rgb, 89, 23, 62), 0.40);
 }
 
 /* ── Typography overview fullbleed ─────────────────────────────── */
@@ -325,7 +368,7 @@ body.print-active .print-book-page { overflow: hidden; }
   gap: 0 56px;
   height: 100dvh;
   padding: 56px 20px;
-  background: var(--fg-overview-bg, #111);
+  background: var(--fg-overview-bg, #283F1A);
   box-sizing: border-box;
   align-items: start;
 }
@@ -477,14 +520,14 @@ body.print-active .print-book-page { overflow: hidden; }
   font-size: clamp(24px, 3.2vw, 48px);
   line-height: var(--ts-display-s-lh, 0.9);
   letter-spacing: var(--ts-display-s-ls, -0.02em);
-  color: var(--charcoal, #111);
+  color: var(--charcoal, #283F1A);
   max-width: 960px;
   margin: 0;
 }
 .intro-body { max-width: 520px; }
 .intro-body p {
   font-family: var(--body-font, 'Inter'), sans-serif;
-  color: var(--charcoal, #111);
+  color: var(--charcoal, #283F1A);
   letter-spacing: var(--ts-body-l-ls, -0.01em);
   line-height: var(--ts-body-l-lh, var(--lh-body));
   font-size: 16px;
@@ -496,7 +539,7 @@ body.print-active .print-book-page { overflow: hidden; }
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--charcoal, #111);
+  background: var(--charcoal, #283F1A);
   color: #fff;
   font-family: var(--display-font, 'DM Sans'), sans-serif;
   font-size: 13px;
@@ -513,8 +556,8 @@ body.print-active .print-book-page { overflow: hidden; }
   align-items: center;
   gap: 8px;
   background: transparent;
-  color: var(--charcoal, #111);
-  border: 1px solid var(--charcoal, #111);
+  color: var(--charcoal, #283F1A);
+  border: 1px solid var(--charcoal, #283F1A);
   font-family: var(--display-font, 'DM Sans'), sans-serif;
   font-size: 13px;
   font-weight: 600;
@@ -559,7 +602,7 @@ body.print-active .print-book-page { overflow: hidden; }
   padding: 14px 18px;
   font-family: var(--body-font, 'Inter'), sans-serif;
   font-size: 14px;
-  color: var(--charcoal, #111);
+  color: var(--charcoal, #283F1A);
   letter-spacing: var(--ts-body-m-ls, 0);
   line-height: var(--ts-body-m-lh, var(--lh-body));
   max-width: 520px;
@@ -584,12 +627,12 @@ body.print-active .print-book-page { overflow: hidden; }
   gap: 6px;
   padding: 28px 0;
   max-width: 45%;
-  color: var(--charcoal, #111);
+  color: var(--charcoal, #283F1A);
   transition: color 0.15s;
   text-align: left;
 }
-.page-nav-link:hover { color: var(--primary-blue, #8B3DFF); }
-.page-nav-link:hover .page-nav-dir { color: var(--primary-blue, #8B3DFF); }
+.page-nav-link:hover { color: var(--brand-accent, #59173E); }
+.page-nav-link:hover .page-nav-dir { color: var(--brand-accent, #59173E); }
 
 .page-nav-dir {
   font-family: var(--body-font, 'Inter'), sans-serif;
@@ -639,8 +682,8 @@ body.print-active .print-book-page { overflow: hidden; }
   text-align: left;
 }
 .sidebar-print-btn:hover {
-  border-color: var(--primary-blue, #8B3DFF);
-  color: var(--primary-blue, #8B3DFF);
+  border-color: var(--brand-accent, #59173E);
+  color: var(--brand-accent, #59173E);
 }
 
 /* ── Print / PDF export ────────────────────────────────────────── */
@@ -670,7 +713,7 @@ body.print-active .print-book-page { overflow: hidden; }
     font-family: Inter, sans-serif;
     font-size: 18px;
     line-height: 1.6;
-    color: #111;
+    color: #283F1A;
     padding: 80px 60px;
   }
 

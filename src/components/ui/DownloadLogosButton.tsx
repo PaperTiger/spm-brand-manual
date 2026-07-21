@@ -1,20 +1,22 @@
 import { createElement, useState } from 'react'
 import JSZip from 'jszip'
 import brand from '../../brand.config'
-import { FullLogoSvg, StackedLogoSvg, LogoMarkSvg } from './LogoSvg'
+import { CompactLogoSvg, LogoMarkSvg } from './LogoSvg'
 import { avatarBgs, faviconVariants, faviconSizes } from '../../brandAssets'
 
-const LOGO_FILES = [
-  'logo-full-dark.svg',
-  'logo-full-primary.svg',
-  'logo-full-white.svg',
-  'logo-mark-primary.svg',
-  'logo-mark-white.svg',
-  'logo-mark.svg',
-  'logo-stacked-dark.svg',
-  'logo-stacked-primary.svg',
-  'logo-stacked-white.svg',
+// Three lockups from the stylesheet: full (mark + spm + communications),
+// compact (mark + spm) and mark (monogram). Each ships in the two-colour
+// primary, its inverse, and a one-colour knockout per brand colour.
+const LOGO_LOCKUPS = ['full', 'compact', 'mark']
+const LOGO_COLORS = [
+  'primary', 'primary-inverse',
+  'jam', 'fern', 'cornflower', 'salt', 'silk', 'honeydew',
+  'black', 'white',
 ]
+
+const LOGO_FILES = LOGO_LOCKUPS.flatMap(lockup =>
+  LOGO_COLORS.map(color => `logo-${lockup}-${color}.svg`)
+)
 
 // Dynamic import so react-dom/server is only loaded when the button is clicked
 async function svgStringFromComponent(element: React.ReactElement): Promise<string> {
@@ -51,15 +53,15 @@ function stripOuterSvgTag(svgStr: string): string {
 
 async function buildAvatarSvg(bg: string, mark: string, wm: string, inner: string): Promise<string> {
   const logoStr = await svgStringFromComponent(
-    createElement(StackedLogoSvg, { markFill: mark, wordmarkFill: wm, innerTextFill: inner })
+    createElement(CompactLogoSvg, { markFill: mark, wordmarkFill: wm, innerTextFill: inner })
   )
   const logoBody = stripOuterSvgTag(logoStr)
   const size = 400
   const logoW = Math.round(size * 0.78)
-  const logoH = Math.round(logoW * 487 / 900)
+  const logoH = Math.round(logoW * 503 / 1293)
   const x = Math.round((size - logoW) / 2)
   const y = Math.round((size - logoH) / 2)
-  return `<svg viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg"><circle cx="${size / 2}" cy="${size / 2}" r="${size / 2}" fill="${bg}"/><svg x="${x}" y="${y}" width="${logoW}" height="${logoH}" viewBox="0 0 900 487" fill="none">${logoBody}</svg></svg>`
+  return `<svg viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg"><circle cx="${size / 2}" cy="${size / 2}" r="${size / 2}" fill="${bg}"/><svg x="${x}" y="${y}" width="${logoW}" height="${logoH}" viewBox="0 0 1293 503" fill="none">${logoBody}</svg></svg>`
 }
 
 async function buildFaviconSvg(bg: string, mark: string, inner: string, size: number): Promise<string> {
@@ -69,7 +71,7 @@ async function buildFaviconSvg(bg: string, mark: string, inner: string, size: nu
   const logoBody = stripOuterSvgTag(logoStr)
   const pad = Math.max(1, Math.round(size * 0.04))
   const logoS = size - pad * 2
-  return `<svg viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg"><rect width="${size}" height="${size}" fill="${bg}"/><svg x="${pad}" y="${pad}" width="${logoS}" height="${logoS}" viewBox="0 0 298 298" fill="none">${logoBody}</svg></svg>`
+  return `<svg viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg"><rect width="${size}" height="${size}" fill="${bg}"/><svg x="${pad}" y="${pad}" width="${logoS}" height="${logoS}" viewBox="0 0 450 450" fill="none">${logoBody}</svg></svg>`
 }
 
 export default function DownloadLogosButton({ style }: { style?: React.CSSProperties }) {
@@ -104,7 +106,7 @@ export default function DownloadLogosButton({ style }: { style?: React.CSSProper
         zip.file(`${root}/png/${file.replace('.svg', '@2x.png')}`, png)
       }))
 
-      // Avatar PNGs — stacked logo on brand-color circle, 400×400
+      // Avatar PNGs — compact logo on brand-color circle, 400×400
       for (const a of avatarBgs) {
         const svgStr = await buildAvatarSvg(a.bg, a.mark, a.wm, a.inner)
         const png = await svgToPng(svgStr, 1000, 1000)

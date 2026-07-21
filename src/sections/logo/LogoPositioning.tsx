@@ -67,7 +67,7 @@ export default function LogoPositioning() {
       <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start', flexWrap: 'wrap' }}>
         {/* Corners */}
         <div style={{ flex: 1, minWidth: 280, display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <p style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 13, color: '#888', margin: 0 }}>
+          <p style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 13, color: '#6B6B6B', margin: 0 }}>
             The logo can appear in the corners
           </p>
           <PositioningBox>
@@ -80,7 +80,7 @@ export default function LogoPositioning() {
 
         {/* Center */}
         <div style={{ flex: 1, minWidth: 280, display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <p style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 13, color: '#888', margin: 0 }}>
+          <p style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 13, color: '#6B6B6B', margin: 0 }}>
             or central to the page
           </p>
           <PositioningBox>

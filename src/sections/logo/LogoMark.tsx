@@ -6,13 +6,12 @@ import DownloadLogosButton from '../../components/ui/DownloadLogosButton'
 const t = brand.tokens
 
 const combos = [
-  { bg: '#FFFFFF',         mark: t['primary-blue'], inner: '#fff', label: 'White',       lbl: '#111' },
-  { bg: '#F3F3F3',         mark: t['primary-blue'], inner: '#fff', label: 'Gray',        lbl: '#111' },
-  { bg: t['pale-green'],   mark: '#111',             inner: '#fff', label: 'Lime',        lbl: '#111' },
-  { bg: t['primary-blue'], mark: '#fff',             inner: t['primary-blue'], label: 'Violet',   lbl: '#fff' },
-  { bg: t['orange'],       mark: '#111',             inner: '#fff', label: 'Coral',       lbl: '#fff' },
-  { bg: t['dark-blue'],    mark: '#fff',             inner: t['primary-blue'], label: 'Deep Violet', lbl: '#fff' },
-  { bg: '#111111',         mark: '#fff',             inner: '#111', label: 'Black',       lbl: '#fff' },
+  { bg: t.salt,       mark: t.jam,  inner: t.salt,       label: 'Salt',       lbl: '#283F1A' },
+  { bg: t.cornflower, mark: t.jam,  inner: t.cornflower, label: 'Cornflower', lbl: '#283F1A' },
+  { bg: t.silk,       mark: t.jam,  inner: t.silk,       label: 'Silk',       lbl: '#283F1A' },
+  { bg: t.honeydew,   mark: t.fern, inner: t.honeydew,   label: 'Honeydew',   lbl: '#283F1A' },
+  { bg: t.fern,       mark: t.salt, inner: t.fern,       label: 'Fern',       lbl: '#FCFBF0' },
+  { bg: t.jam,        mark: t.salt, inner: t.jam,        label: 'Jam',        lbl: '#FCFBF0' },
 ]
 
 export default function LogoMark() {
@@ -20,7 +19,7 @@ export default function LogoMark() {
     <div>
       {/* Hero header */}
       <div className="logo-hero" style={{ background: t['dark-blue'], minHeight: 280 }}>
-        <LogoMarkSvg markFill="#fff" innerTextFill={t['primary-blue']} style={{ maxHeight: 120, width: 'auto' }} />
+        <LogoMarkSvg markFill="#fff" innerTextFill={t['brand-accent']} style={{ maxHeight: 120, width: 'auto' }} />
       </div>
 
       <div className="page">
@@ -35,8 +34,8 @@ export default function LogoMark() {
 
         {/* Clearspace */}
         <div className="content-block">
-          <h3 style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontWeight: 500, fontSize: 17, margin: '0 0 12px', color: '#111' }}>Clearspace</h3>
-          <p style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 14, color: '#111', lineHeight: 1.6, marginBottom: 24, maxWidth: 520 }}>
+          <h3 style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontWeight: 500, fontSize: 17, margin: '0 0 12px', color: '#283F1A' }}>Clearspace</h3>
+          <p style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 14, color: '#283F1A', lineHeight: 1.4, marginBottom: 24, maxWidth: 520 }}>
             x equals ½ the height of the {brand.meta.client} mark. Maintain this distance on all four sides.
           </p>
           <ClearspaceDiagram
@@ -49,7 +48,7 @@ export default function LogoMark() {
 
         {/* Approved color combinations */}
         <div style={{ marginTop: 48, paddingTop: 0 }}>
-          <h3 style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontWeight: 500, fontSize: 17, margin: '0 0 16px', color: '#111' }}>Approved color combinations</h3>
+          <h3 style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontWeight: 500, fontSize: 17, margin: '0 0 16px', color: '#283F1A' }}>Approved color combinations</h3>
           <div style={{ display: 'grid', gridTemplateColumns: `repeat(${combos.length}, 1fr)`, gap: 0 }}>
             {combos.map(c => (
               <div key={c.label} style={{ background: c.bg, padding: '32px 16px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, justifyContent: 'center', aspectRatio: '1' }}>

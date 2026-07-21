@@ -1,15 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import '@fontsource/dm-sans/300.css'
-import '@fontsource/dm-sans/400.css'
-import '@fontsource/dm-sans/500.css'
-import '@fontsource/dm-sans/600.css'
-import '@fontsource/dm-sans/700.css'
-import '@fontsource/inter/300.css'
-import '@fontsource/inter/400.css'
-import '@fontsource/inter/500.css'
-import '@fontsource/inter/600.css'
-import '@fontsource/inter/700.css'
+// Urbanist is declared in index.css as an alias off the Fontsource variable
+// files, which covers the 500 / 550 / 600 weights the stylesheet calls for.
+// Old Standard TT ships static files: the brand uses the italic only.
+import '@fontsource/old-standard-tt/400-italic.css'
 import './index.css'
 import App from './App.tsx'
 

@@ -29,8 +29,16 @@ function luminance(hex: string): number {
   return 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b)
 }
 
+function contrast(a: string, b: string): number {
+  const [x, y] = [luminance(a), luminance(b)]
+  return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05)
+}
+
+// The brand has no black, so the dark option is Juniper. Juniper is lighter
+// than black, which makes a fixed luminance threshold unsafe on mid-tone
+// steps: pick whichever of the two brand values actually contrasts better.
 function stepTextColor(hex: string): string {
-  return luminance(hex) > 0.179 ? '#000000' : '#ffffff'
+  return contrast(hex, '#283F1A') >= contrast(hex, '#FCFBF0') ? '#283F1A' : '#FCFBF0'
 }
 
 // ── Scale generation ──────────────────────────────────────────────
@@ -61,7 +69,10 @@ function generateScale(hex: string) {
       shade !== undefined ? mixRgb(base, BLACK, shade) :
       tint  !== undefined ? mixRgb(base, WHITE, tint)  : base
     const h = rgbToHex(rgb)
-    return { label, hex: h, textColor: stepTextColor(h), isBase: label === '400' }
+    const tc = stepTextColor(h)
+    // Mid-tone steps cannot reach 4.5:1 against either brand text value, so
+    // they get a solid backing chip instead of text straight on the swatch.
+    return { label, hex: h, textColor: tc, isBase: label === '400', needsChip: contrast(h, tc) < 4.5 }
   })
 }
 
@@ -101,7 +112,7 @@ export default function ColorPathways() {
                 {color.name}
               </div>
               <div style={{ display: 'flex', gap: 0 }}>
-                {scale.map(({ label, hex, textColor, isBase }) => (
+                {scale.map(({ label, hex, textColor, isBase, needsChip }) => (
                   <div
                     key={label}
                     style={{
@@ -112,16 +123,25 @@ export default function ColorPathways() {
                     }}
                   >
                     <div style={{
-                      fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 9,
-                      color: textColor, lineHeight: 1.2, opacity: 0.7,
+                      ...(needsChip
+                        ? { background: textColor === '#283F1A' ? '#FCFBF0' : '#283F1A',
+                            padding: '3px 5px', borderRadius: 3, display: 'inline-block' }
+                        : {}),
                     }}>
-                      {label}
-                    </div>
-                    <div style={{
-                      fontFamily: `var(--body-font, 'Inter'), sans-serif`, color: textColor,
-                      fontSize: isBase ? 11 : 9, fontWeight: isBase ? 700 : 400,
-                    }}>
-                      {hex}
+                      <div style={{
+                        fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 9,
+                        color: needsChip ? (textColor === '#283F1A' ? '#283F1A' : '#FCFBF0') : textColor,
+                        lineHeight: 1.2,
+                      }}>
+                        {label}
+                      </div>
+                      <div style={{
+                        fontFamily: `var(--body-font, 'Inter'), sans-serif`,
+                        color: needsChip ? (textColor === '#283F1A' ? '#283F1A' : '#FCFBF0') : textColor,
+                        fontSize: isBase ? 11 : 9, fontWeight: isBase ? 700 : 500,
+                      }}>
+                        {hex}
+                      </div>
                     </div>
                   </div>
                 ))}

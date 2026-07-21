@@ -45,7 +45,7 @@ export default function TypeSpecimen() {
               fontSize: CLAMP_SIZE[s.size] ?? s.size,
               letterSpacing: s.ls,
               lineHeight: s.lh,
-              color: 'var(--charcoal, #111)',
+              color: 'var(--charcoal, #283F1A)',
             }}>
               {SPECIMEN_TEXT[s.name] ?? s.name}
             </div>

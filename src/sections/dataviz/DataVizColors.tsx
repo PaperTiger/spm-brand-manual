@@ -2,41 +2,48 @@ import brand from '../../brand.config'
 
 const t = brand.tokens
 
+// The stylesheet does not specify a data visualisation palette. This sequence
+// extends the brand palette, ordered so that adjacent series stay separable:
+// it alternates dark and light rather than running the two darks together.
+// Series colours come from the colour-pathway ramps rather than the raw
+// palette: several brand colours are too light to carry a data series on a
+// white ground. Each entry is contrast-checked against its chart ground, and
+// adjacent entries are kept at least 1.9:1 apart from one another.
 const sequence = [
   {
-    n: '01', name: 'Electric Violet', hex: t['primary-blue'], text: '#fff',
-    note: 'Primary series: anchors every chart to the brand identity. Always use first.',
+    n: '01', name: 'Cornflower 600', hex: '#748AB2', text: '#fff',
+    note: 'Primary series. Cornflower 400 is far too light for a white ground (1.8:1), so the 600 step carries it.',
   },
   {
-    n: '02', name: 'Coral', hex: t['orange'], text: '#fff',
-    note: 'Second series: contrast-safe alongside Electric Violet on both light and dark.',
+    n: '02', name: 'Fern 400', hex: '#324625', text: '#fff',
+    note: 'Second series: the base brand green, 10.3:1 on white.',
   },
   {
-    n: '03', name: 'Deep Violet', hex: t['dark-blue'], text: '#fff',
-    note: 'Third series: use for charts requiring three or more distinct data series.',
+    n: '03', name: 'Salt 700', hex: '#86857F', text: '#fff',
+    note: 'Third series. Salt itself is a background colour, so the 700 step is used for data.',
   },
   {
-    n: '04', name: 'Bright Purple', hex: t['purple'], text: '#fff',
-    note: 'Fourth series: limit charts to four color-coded series maximum.',
+    n: '04', name: 'Jam 400', hex: '#59173E', text: '#fff',
+    note: 'Fourth series: the base brand plum, 13.0:1 on white.',
   },
   {
-    n: '05', name: 'Lime', hex: t['pale-green'], text: '#000',
-    note: 'Use only on dark backgrounds. Insufficient contrast on white chart areas.',
+    n: '05', name: 'Silk 700', hex: '#77726E', text: '#fff',
+    note: 'Fifth series. Limit charts to five colour-coded series; beyond that, use opacity steps of one hue.',
   },
   {
-    n: '06', name: 'Mid Gray', hex: '#9CA3AF', text: '#fff',
-    note: 'Axes, gridlines, and reference lines only. Never use as a primary data series.',
+    n: '06', name: 'Mid Gray', hex: '#9CA3AF', text: '#283F1A',
+    note: 'Axes, gridlines, and reference lines only. Never use as a data series.',
   },
 ]
 
 const rules = [
   {
-    heading: 'Start with Electric Violet',
-    body: 'The primary brand color always takes the first data series, anchoring the chart and drawing the eye to the most important metric.',
+    heading: 'Start with Cornflower 600',
+    body: 'Cornflower 600 always takes the first data series, anchoring the chart and drawing the eye to the most important metric.',
   },
   {
-    heading: 'Maximum four series',
-    body: 'Limit each chart to four color-coded data series. For five or more, use opacity steps of a single hue (see sequential palette below).',
+    heading: 'Maximum five series',
+    body: 'Limit each chart to five color-coded data series. For six or more, use opacity steps of a single hue (see sequential palette below).',
   },
   {
     heading: 'Gray is for context, not data',
@@ -73,11 +80,11 @@ export default function DataVizColors() {
             </div>
             <div style={{ padding: "16px 18px" }}>
               <div style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontSize: 13, fontWeight: 600,
-                color: "#111", marginBottom: 4 }}>{s.name}</div>
+                color: "#283F1A", marginBottom: 4 }}>{s.name}</div>
               <div style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 11, fontWeight: 600,
-                color: "#111", letterSpacing: "0.06em", marginBottom: 8 }}>{s.hex.toUpperCase()}</div>
-              <div style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 12, color: "#111",
-                lineHeight: 1.55 }}>{s.note}</div>
+                color: "#283F1A", letterSpacing: "0.06em", marginBottom: 8 }}>{s.hex.toUpperCase()}</div>
+              <div style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 12, color: "#283F1A",
+                lineHeight: 1.4 }}>{s.note}</div>
             </div>
           </div>
         ))}
@@ -86,7 +93,7 @@ export default function DataVizColors() {
       {/* Usage rules */}
       <div style={{ borderTop: "1px solid #E5E5E5", paddingTop: 40, marginBottom: 56 }}>
         <h3 style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontWeight: 500, fontSize: 17,
-          margin: '0 0 24px', color: '#111' }}>Usage rules</h3>
+          margin: '0 0 24px', color: '#283F1A' }}>Usage rules</h3>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0,
           border: "1px solid #E5E5E5" }}>
           {rules.map((r, i) => (
@@ -96,9 +103,9 @@ export default function DataVizColors() {
               padding: "24px",
             }}>
               <div style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontSize: 13, fontWeight: 600,
-                color: t['primary-blue'], marginBottom: 8 }}>{r.heading}</div>
-              <div style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 13, color: "#111",
-                lineHeight: 1.6 }}>{r.body}</div>
+                color: t['brand-accent'], marginBottom: 8 }}>{r.heading}</div>
+              <div style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 13, color: "#283F1A",
+                lineHeight: 1.4 }}>{r.body}</div>
             </div>
           ))}
         </div>
@@ -107,27 +114,27 @@ export default function DataVizColors() {
       {/* Sequential palette */}
       <div style={{ borderTop: "1px solid #E5E5E5", paddingTop: 40 }}>
         <h3 style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontWeight: 500, fontSize: 17,
-          margin: '0 0 8px', color: '#111' }}>Sequential palette</h3>
-        <p style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 14, color: '#111',
-          lineHeight: 1.6, marginBottom: 24, maxWidth: 520 }}>
+          margin: '0 0 8px', color: '#283F1A' }}>Sequential palette</h3>
+        <p style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 14, color: '#283F1A',
+          lineHeight: 1.4, marginBottom: 24, maxWidth: 520 }}>
           When a single data series needs value differentiation (heat maps, ranked lists, or
           choropleth maps), use opacity steps of the primary color.
         </p>
         <div style={{ display: "flex", gap: 2, marginBottom: 8 }}>
           {[100, 80, 60, 40, 20, 10].map(pct => (
             <div key={pct} style={{ flex: 1 }}>
-              <div style={{ height: 64, background: t['primary-blue'], opacity: pct / 100,
+              <div style={{ height: 64, background: t['brand-accent'], opacity: pct / 100,
                 border: pct <= 20 ? "1px solid #E5E5E5" : undefined }} />
               <div style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 10, fontWeight: 600,
-                color: "#111", letterSpacing: "0.06em", paddingTop: 8, textAlign: "center" }}>
+                color: "#283F1A", letterSpacing: "0.06em", paddingTop: 8, textAlign: "center" }}>
                 {pct}%
               </div>
             </div>
           ))}
         </div>
-        <div style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 12, color: "#111",
+        <div style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 12, color: "#283F1A",
           marginTop: 4 }}>
-          100% → 80% → 60% → 40% → 20% → 10% opacity of Electric Violet
+          100% → 80% → 60% → 40% → 20% → 10% opacity of Cornflower 600
         </div>
       </div>
     </div>

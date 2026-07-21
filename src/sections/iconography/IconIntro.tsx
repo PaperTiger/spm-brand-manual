@@ -33,7 +33,7 @@ export default function IconIntro() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 1, background: "#E5E5E5", marginTop: 32, marginBottom: 20 }}>
           {paths.map((p, i) => (
             <div key={i} style={{ background: "#F8F8F8", aspectRatio: "1", display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary-blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--brand-accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d={p} />
               </svg>
             </div>

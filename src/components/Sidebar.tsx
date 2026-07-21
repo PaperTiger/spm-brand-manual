@@ -68,13 +68,13 @@ export default function Sidebar({ currentPage, onNavigate, isOpen, onClose, onPr
             <img
               src={brand.meta.sidebarLogoImage}
               alt={brand.meta.client}
-              style={{ height: 24, width: 'auto', display: 'block' }}
+              style={{ height: 40, width: 'auto', display: 'block' }}
               onError={() => { setLogoError(true) }}
             />
           )}
           {(!hasLogo || logoError) && (
             <div style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontWeight: 600, fontSize: 15,
-              letterSpacing: '-0.02em', color: 'var(--charcoal, #111)', lineHeight: 1 }}>
+              letterSpacing: '-0.02em', color: 'var(--charcoal, #283F1A)', lineHeight: 1 }}>
               {brand.meta.nameLine1}{brand.meta.nameLine2 ? ' ' + brand.meta.nameLine2 : ''}
             </div>
           )}

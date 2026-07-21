@@ -88,7 +88,7 @@ export default function TypeUsage() {
             <div style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: 'var(--charcoal)' }}>
               {row.role}
             </div>
-            <div style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 12, color: '#111', letterSpacing: '0.01em' }}>
+            <div style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 12, color: '#283F1A', letterSpacing: '0.01em' }}>
               {row.face} · {row.weight} · {row.specs}
             </div>
           </div>

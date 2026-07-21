@@ -35,6 +35,9 @@ export interface TypeScaleEntry {
 
 export interface BrandConfig {
   typeScale: TypeScaleEntry[]
+  /** Optional second track (e.g. a serif italic) paired with the headline
+   *  levels of `typeScale`. Entries match by `name`. */
+  serifScale?: TypeScaleEntry[]
   meta: {
     client: string
     nameLine1: string
@@ -74,6 +77,9 @@ export interface BrandConfig {
     googleFallbackFont: string
     googleFallbackUrl: string
     systemFallbackFont: string
+    /** Serif stand-ins for Old Standard TT at each fallback tier. */
+    officeSerifFallback?: string
+    systemSerifFallback?: string
     fonts: FontFace[]
   }
   colors: { primary: ColorToken[]; secondary: ColorToken[] }
@@ -81,118 +87,196 @@ export interface BrandConfig {
   images: {
     photography: string[]   // filenames in public/images/photography/
     applications: string[]  // filenames in public/images/applications/
+    pattern?: string[]      // filenames in public/images/pattern/
+    symbols?: string[]      // filenames in public/images/symbols/
   }
   nav: NavGroup[]
 }
 
-const _client = 'Brand Template'
+const _client = 'SPM Communications'
 
 const brand: BrandConfig = {
+  // Headline levels map to the stylesheet's Urbanist track (H1-H6), and the
+  // body levels to its Paragraph XL/LG/M/SM. The stylesheet also specifies a
+  // parallel Old Standard TT Italic track at every headline level, at its own
+  // larger sizes and tighter tracking: see `serifScale` below.
   typeScale: [
-    { size: '96px', name: 'Display XL',  family: 'DM Sans', weight: 700, ls: '-0.04em',  lh: 0.9 },
-    { size: '73px', name: 'Display L',   family: 'DM Sans', weight: 700, ls: '-0.03em',  lh: 0.9 },
-    { size: '64px', name: 'Display M',   family: 'DM Sans', weight: 700, ls: '-0.03em',  lh: 0.9 },
-    { size: '48px', name: 'Display S',   family: 'DM Sans', weight: 700, ls: '-0.025em', lh: 0.95 },
-    { size: '42px', name: 'Headline XL', family: 'DM Sans', weight: 600, ls: '-0.02em',  lh: 1.0 },
-    { size: '32px', name: 'Headline L',  family: 'DM Sans', weight: 600, ls: '-0.015em', lh: 1.1 },
-    { size: '24px', name: 'Headline M',  family: 'DM Sans', weight: 600, ls: '-0.01em',  lh: 1.2 },
-    { size: '21px', name: 'Headline S',  family: 'DM Sans', weight: 600, ls: '-0.01em',  lh: 1.2 },
-    { size: '18px', name: 'Body XL',     family: 'Inter',   weight: 400, ls: '-0.01em',  lh: 1.55 },
-    { size: '16px', name: 'Body L',      family: 'Inter',   weight: 400, ls: '-0.01em',  lh: 1.6 },
-    { size: '14px', name: 'Body M',      family: 'Inter',   weight: 400, ls: '0',         lh: 1.6 },
-    { size: '12px', name: 'Caption',     family: 'Inter',   weight: 400, ls: '0',         lh: 1.5 },
+    { size: '148px', name: 'Display XL',  family: 'Urbanist', weight: 550, ls: '-0.03em', lh: 1.0 },
+    { size: '116px', name: 'Display L',   family: 'Urbanist', weight: 550, ls: '-0.03em', lh: 1.0 },
+    { size: '72px',  name: 'Display M',   family: 'Urbanist', weight: 550, ls: '-0.03em', lh: 1.0 },
+    { size: '56px',  name: 'Display S',   family: 'Urbanist', weight: 600, ls: '-0.03em', lh: 1.1 },
+    { size: '48px',  name: 'Headline XL', family: 'Urbanist', weight: 600, ls: '-0.02em', lh: 1.1 },
+    { size: '32px',  name: 'Headline L',  family: 'Urbanist', weight: 600, ls: '-0.02em', lh: 1.1 },
+    { size: '28px',  name: 'Headline M',  family: 'Urbanist', weight: 600, ls: '-0.02em', lh: 1.1 },
+    { size: '24px',  name: 'Headline S',  family: 'Urbanist', weight: 600, ls: '-0.01em', lh: 1.2 },
+    { size: '18px',  name: 'Body XL',     family: 'Urbanist', weight: 500, ls: '0.01em',  lh: 1.4 },
+    { size: '16px',  name: 'Body L',      family: 'Urbanist', weight: 500, ls: '0.01em',  lh: 1.4 },
+    // 14px and 12px are not specified in the stylesheet. Extrapolated from the
+    // 16px Paragraph SM rule so captions and table copy have a defined style.
+    { size: '14px',  name: 'Body M',      family: 'Urbanist', weight: 500, ls: '0.01em',  lh: 1.4 },
+    { size: '12px',  name: 'Caption',     family: 'Urbanist', weight: 500, ls: '0.01em',  lh: 1.4 },
   ],
+
+  // Old Standard TT Italic track, paired one-to-one with the headline levels
+  // above. Sizes run larger than their sans counterparts at every level.
+  serifScale: [
+    { size: '166px', name: 'Display XL',  family: 'Old Standard TT', weight: 400, ls: '-0.07em', lh: 1.0 },
+    { size: '125px', name: 'Display L',   family: 'Old Standard TT', weight: 400, ls: '-0.06em', lh: 1.0 },
+    { size: '80px',  name: 'Display M',   family: 'Old Standard TT', weight: 400, ls: '-0.06em', lh: 1.0 },
+    { size: '64px',  name: 'Display S',   family: 'Old Standard TT', weight: 400, ls: '-0.06em', lh: 1.0 },
+    { size: '56px',  name: 'Headline XL', family: 'Old Standard TT', weight: 400, ls: '-0.06em', lh: 1.0 },
+    { size: '36px',  name: 'Headline L',  family: 'Old Standard TT', weight: 400, ls: '-0.06em', lh: 1.0 },
+  ],
+
   meta: {
     client:           _client,
-    nameLine1:        _client,
-    nameLine2:        '',
-    title:            'Brand guidelines',
+    // Cover heading, set on two lines.
+    nameLine1:        'Brand',
+    nameLine2:        'manual',
+    title:            'Brand manual',
     version:          'Version 1.0',
-    date:             'June 2026',
+    date:             'July 2026',
     preparedBy:       'Paper Tiger',
     sidebarLogoImage: `${import.meta.env.BASE_URL}images/logos/logo-full-primary.svg`,
-    coverSealImage: `${import.meta.env.BASE_URL}images/logos/logo-mark-white.svg`,
+    coverSealImage: `${import.meta.env.BASE_URL}images/logos/logo-mark-primary.svg`,
   },
 
+  // Specimen copy is taken from the stylesheet's own sample text.
   specimens: {
-    display96:        'Brand',
-    display73:        'Beyond the brief',
-    display64:        'Make it matter',
-    display48:        'Identity systems',
-    headline42:       'Design that works as hard as you do',
-    headline32:       'Built for scale. Made to last.',
-    headline24:       `${_client} creates visual identity systems that grow with your business.`,
-    headline21:       '12 industries. One trusted partner.',
-    body18:           `${_client} creates visual identity systems built to last.`,
-    body16:           `${_client} creates visual identity systems that grow with your business and stand out across every touchpoint.`,
-    body14:           `${_client} creates visual identity systems that grow with your business and stand out across every touchpoint. From brand strategy to final artwork, we make every element count.`,
-    body12:           `Caption. ${_client} creates visual identity systems that last.`,
-    sentence:         `${_client} creates visual identity systems built for scale and designed to last.`,
-    avoidText:        `${_client} creates identity systems that grow with your business.`,
-    avoidTextPart1:   _client,
-    avoidTextPart2:   'creates identity systems that grow with your business.',
-    fallbackGoogle16: `${_client} creates visual identity systems built to last. When brand fonts are unavailable, DM Sans provides a clean, modern alternative.`,
-    fallbackSystem16: `${_client} creates visual identity systems built to last. When brand fonts are unavailable, Arial maintains clarity and legibility.`,
+    display96:        'Senior-led.',
+    display73:        'Boutique fast.',
+    display64:        'Senior-led.',
+    display48:        'Boutique fast.',
+    headline42:       'Life’s too short to work with jerks. At SPM, we live by that.',
+    headline32:       'Kind words from our team.',
+    headline24:       `${_client} is a strategy-led PR agency for consumer brands.`,
+    headline21:       'Built for what PR is becoming.',
+    body18:           'SPM is a strategy-led PR agency for consumer brands, where cultural intelligence and AI visibility drive business results.',
+    body16:           'When members share their challenges and strategies with the community, everyone benefits from a richer pool of collective knowledge.',
+    body14:           'No jerks means you work with clients and brands you trust in an atmosphere of mutual respect among agency leadership, team members and clients.',
+    body12:           'Caption. SPM is a strategy-led PR agency for consumer brands.',
+    sentence:         'SPM is a strategy-led PR agency for consumer brands, where cultural intelligence and AI visibility drive business results.',
+    avoidText:        'SPM is a strategy-led PR agency for consumer brands.',
+    avoidTextPart1:   'Kind words',
+    avoidTextPart2:   'from our team.',
+    fallbackGoogle16: 'When members share their challenges and strategies with the community, everyone benefits from a richer pool of collective knowledge. When Urbanist is unavailable, Futura carries the same geometric character.',
+    fallbackSystem16: 'When members share their challenges and strategies with the community, everyone benefits from a richer pool of collective knowledge. When neither the brand fonts nor the Microsoft Office fonts load, Arial keeps the page legible.',
   },
 
+  // The template's component layer references a fixed set of CSS custom
+  // properties (--charcoal for body ink, --primary-blue, --dark-blue). Those
+  // names are kept so nothing breaks, with SPM values mapped onto them, and
+  // the palette is also exposed under its own token names.
   tokens: {
-    'lh-body':      '1.65',
-    'primary-blue':     '#8B3DFF',
-    'primary-blue-rgb': '139, 61, 255',
-    'dark-blue':    '#1A0066',
-    charcoal:       '#111111',
-    white:          '#FFFFFF',
-    orange:         '#FF5E14',
-    purple:         '#C44DFF',
-    'pale-green':   '#CCFFCC',
-    'lime-dark':    '#5C705C',
-    green:          '#22C55E',
-    fuscia:         '#FF1493',
-    gray:           '#F3F3F3',
+    'lh-body':          '1.4',
+    // The brand uses no black. Juniper is the darkest value: body ink and deep
+    // grounds both. `charcoal` keeps its name only because the template's
+    // component layer references --charcoal in ~33 places.
+    charcoal:           '#283F1A',
+    juniper:            '#283F1A',
+    white:              '#FFFFFF',
+    // Page ground. The homepage design sits on Salt, not white.
+    'page-bg':          '#FCFBF0',
+    // UI accent for text, rules and active states. Must clear WCAG AA on the
+    // light page ground, so it is Jam (13.0:1 on white), never Cornflower
+    // (1.8:1 on white). Cornflower is a background colour only.
+    'brand-accent':     '#59173E',
+    'brand-accent-rgb': '89, 23, 62',
+    'dark-blue':        '#59173E',
+    fern:               '#324625',
+    'fern-rgb':         '50, 70, 37',
+    cornflower:         '#A4C3FA',
+    salt:               '#FCFBF0',
+    jam:                '#59173E',
+    'jam-rgb':          '89, 23, 62',
+    silk:               '#E1D7D0',
+    honeydew:           '#D9DB8C',
+    gray:               '#F3F3F3',
   },
 
   typography: {
-    displayFont:        'DM Sans',
-    bodyFont:           'Inter',
-    bodyFontUrl:        'https://fonts.google.com/specimen/Inter',
-    googleFallbackFont: 'DM Sans',
-    googleFallbackUrl:  'https://fonts.google.com/specimen/DM+Sans',
+    displayFont:        'Urbanist',
+    bodyFont:           'Urbanist',
+    bodyFontUrl:        'https://fonts.google.com/specimen/Urbanist',
+    // SPM's own fonts are Google Fonts, so the fallback tiers step down to the
+    // Microsoft Office family first, then to pre-installed system faces.
+    googleFallbackFont: 'Futura',
+    googleFallbackUrl:  'https://fonts.google.com/specimen/Urbanist',
+    // Arial rather than Century Gothic: Century Gothic ships with Microsoft
+    // Office, not with the operating system, so it belongs to the Office tier.
+    // Arial is present on Windows and macOS, and aliased on Linux.
     systemFallbackFont: 'Arial',
+    // Old Standard TT is the accent face, so each fallback tier needs a serif
+    // partner as well as a sans one.
+    officeSerifFallback: 'Baskerville',
+    systemSerifFallback: 'Times New Roman',
     fonts: [
-      { family: 'DM Sans', weight: '300 700', file: '/fonts/DMSans-VariableFont.ttf' },
-      { family: 'Inter',   weight: '300 700', file: '/fonts/Inter-VariableFont_opsz,wght.ttf' },
+      { family: 'Urbanist',        weight: '100 900', file: 'Google Fonts (variable)' },
+      { family: 'Old Standard TT', weight: '400',     file: 'Google Fonts (italic)' },
     ],
   },
 
+  // The stylesheet splits these three / three: Fern, Cornflower and Salt are
+  // the core colors, Jam, Silk and Honeydew the accents. Jam is an accent
+  // despite carrying the logo.
   colors: {
     primary: [
-      { name: 'Electric Violet', hex: '#8B3DFF', textColor: '#FFFFFF' },
-      { name: 'Deep Violet',     hex: '#1A0066', textColor: '#FFFFFF' },
-      { name: 'Black',           hex: '#111111', textColor: '#FFFFFF' },
-      { name: 'White',           hex: '#FFFFFF', textColor: '#000000', outline: '1px solid #DADADA' },
+      { name: 'Juniper',    hex: '#283F1A', textColor: '#FCFBF0' },
+      { name: 'Fern',       hex: '#324625', textColor: '#FCFBF0' },
+      { name: 'Cornflower', hex: '#A4C3FA', textColor: '#283F1A' },
+      { name: 'Salt',       hex: '#FCFBF0', textColor: '#283F1A', outline: '1px solid #E5E2D6' },
     ],
     secondary: [
-      { name: 'Coral',          hex: '#FF5E14', textColor: '#FFFFFF' },
-      { name: 'Bright Purple',  hex: '#C44DFF', textColor: '#FFFFFF' },
-      { name: 'Lime',           hex: '#CCFFCC', textColor: '#000000' },
-      { name: 'Gray',           hex: '#F3F3F3', textColor: '#000000', outline: '1px solid #DADADA' },
+      { name: 'Jam',      hex: '#59173E', textColor: '#FCFBF0' },
+      { name: 'Silk',     hex: '#E1D7D0', textColor: '#283F1A' },
+      { name: 'Honeydew', hex: '#D9DB8C', textColor: '#283F1A' },
     ],
   },
 
   images: {
-    photography: [],
-    applications: [],
+    // grading-do-dont.webp is deliberately excluded: it is a do/don't
+    // comparison pair, not a photography example.
+    photography: [
+      'portrait-headshot.webp',
+      'team-candid.webp',
+      'client-philz-coffee.webp',
+      'food-dessert-honeydew.webp',
+    ],
+    applications: [
+      'social-philz-cornflower.webp',
+      'social-dessert-honeydew.webp',
+      'banner-symbol-masks.webp',
+      'slide-our-culture.webp',
+      'campaign-pair.webp',
+      'campaign-triptych.webp',
+      'grid-swoosh-eye.webp',
+    ],
+    pattern: [
+      'symbol-pattern-cornflower.webp',
+      'gradient-salt-cornflower.webp',
+      'logo-shape-noise-gradient.webp',
+      'testimonial-card-jam.webp',
+      'headline-mixed-serif.webp',
+    ],
+    symbols: [
+      'symbol-set-overview.webp',
+      'symbols-core-fern.webp',
+      'symbol-tiles-grid.webp',
+      'symbol-composition.webp',
+    ],
   },
 
+  // From the stylesheet's approved pairings matrix. The rule it encodes: dark
+  // grounds (Fern, Jam) take a light mark, light grounds take a dark mark, and
+  // Fern and Jam are never paired with each other.
   colorPairings: [
-    { bg: 'Electric Violet', logo: 'logo-full-white.svg' },
-    { bg: 'Deep Violet',     logo: 'logo-full-white.svg' },
-    { bg: 'Black',           logo: 'logo-full-white.svg' },
-    { bg: 'White',           logo: 'logo-full-dark.svg' },
-    { bg: 'Coral',           logo: 'logo-full-white.svg' },
-    { bg: 'Bright Purple',   logo: 'logo-full-white.svg' },
-    { bg: 'Lime',            logo: 'logo-full-dark.svg' },
-    { bg: 'Gray',            logo: 'logo-full-dark.svg' },
+    { bg: 'Juniper',    logo: 'logo-full-salt.svg' },
+    { bg: 'Fern',       logo: 'logo-full-salt.svg' },
+    { bg: 'Cornflower', logo: 'logo-full-jam.svg' },
+    { bg: 'Salt',       logo: 'logo-full-jam.svg' },
+    { bg: 'Jam',        logo: 'logo-full-salt.svg' },
+    { bg: 'Silk',       logo: 'logo-full-jam.svg' },
+    { bg: 'Honeydew',   logo: 'logo-full-fern.svg' },
   ],
 
   nav: [
@@ -204,7 +288,7 @@ const brand: BrandConfig = {
       group: 'Logo & mark',
       items: [
         { label: 'Full logo',        id: 'logo-horizontal' },
-        { label: 'Stacked logo',     id: 'logo-stacked' },
+        { label: 'Compact logo',     id: 'logo-compact' },
         { label: 'Logo mark',        id: 'h-logo-mark' },
         { label: 'Avatar & favicon', id: 'logo-avatar' },
         { label: 'Co-branding',      id: 'logo-cobranding' },
@@ -227,7 +311,7 @@ const brand: BrandConfig = {
       items: [
         { label: 'Introduction', id: 'type-intro' },
         {
-          label: 'Display & body', id: 'fg-overview',
+          label: 'Urbanist', id: 'fg-overview',
           groupId: 'nav-fg-group', subId: 'nav-fg-sub',
           children: [
             { label: 'Overview',      id: 'fg-overview' },
@@ -236,7 +320,9 @@ const brand: BrandConfig = {
             { label: 'Size & scale',  id: 'fg-scale' },
           ],
         },
-        { label: 'Google fallback', id: 'google-fallback' },
+        { label: 'Old Standard TT',        id: 'type-oldstandard' },
+        { label: "Pairing do's and don'ts", id: 'type-pairing' },
+        { label: 'Microsoft Office fallback', id: 'google-fallback' },
         { label: 'System fallback', id: 'type-fallback' },
         { label: 'What to avoid',   id: 'type-avoid' },
       ],
@@ -244,10 +330,14 @@ const brand: BrandConfig = {
     {
       group: 'Photography',
       items: [
-        { label: 'Introduction', id: 'photo-intro' },
-        { label: 'Examples',     id: 'photo-examples' },
-        { label: 'Dos',          id: 'photo-dos' },
-        { label: "Don'ts",       id: 'photo-donts' },
+        { label: "Do's and don'ts", id: 'photo-dos' },
+      ],
+    },
+    {
+      group: 'Symbols',
+      items: [
+        { label: 'Brand symbols',   id: 'symbols' },
+        { label: 'Pattern & texture', id: 'pattern' },
       ],
     },
     {

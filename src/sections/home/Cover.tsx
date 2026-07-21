@@ -13,15 +13,18 @@ function SealFallback() {
 }
 
 export default function Cover() {
-  const { nameLine1, nameLine2, title, version, date, preparedBy, coverSealImage } = brand.meta
+  const { nameLine1, nameLine2, client, version, date, preparedBy, coverSealImage } = brand.meta
   const [imgErr, setImgErr] = useState(false)
   return (
     <div className="cover">
+      {/* Two-line lockup following the brand's own headline rule: sans on the
+          top line, Old Standard italic on the bottom. */}
       <h1 className="cover-heading">
-        {nameLine1}{nameLine2 && <><br />{nameLine2}</>}
+        <span className="cover-heading-sans">{nameLine1}</span>
+        {nameLine2 && <span className="cover-heading-serif">{nameLine2}</span>}
       </h1>
       <div className="cover-meta">
-        <div style={{ fontWeight: 600 }}>{title}</div>
+        <div style={{ fontWeight: 600 }}>{client}</div>
         <div>{version}</div>
         <div>{date}</div>
         <div>Prepared by {preparedBy}</div>

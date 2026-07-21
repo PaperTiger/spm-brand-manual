@@ -13,8 +13,8 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "@fontsource/dm-sans": "^5.2.8",
-    "@fontsource/inter": "^5.2.8",
+    "@fontsource-variable/urbanist": "^5.3.0",
+    "@fontsource/old-standard-tt": "^5.3.0",
     "@marker.io/browser": "^0.20.2",
     "dom-to-image-more": "^3.10.0",
     "html-to-image": "^1.11.13",

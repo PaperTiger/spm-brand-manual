@@ -30,11 +30,11 @@ function SpecTable({ rows }: { rows: { spec: string; value: string }[] }) {
           borderBottom: i < rows.length - 1 ? "1px solid #E5E5E5" : undefined,
         }}>
           <div style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 11, fontWeight: 700,
-            color: "#111", textTransform: "uppercase", letterSpacing: "0.05em", paddingTop: 1 }}>
+            color: "#283F1A", textTransform: "uppercase", letterSpacing: "0.05em", paddingTop: 1 }}>
             {row.spec}
           </div>
-          <div style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 13, color: "#111",
-            lineHeight: 1.55 }}>{row.value}</div>
+          <div style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 13, color: "#283F1A",
+            lineHeight: 1.4 }}>{row.value}</div>
         </div>
       ))}
     </div>
@@ -72,9 +72,9 @@ export default function PrintSpecs() {
       {/* Safe area diagram */}
       <div style={{ borderTop: "1px solid #E5E5E5", paddingTop: 40, marginBottom: 56 }}>
         <h3 style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontWeight: 500, fontSize: 17,
-          margin: '0 0 8px', color: '#111' }}>Print safe area</h3>
-        <p style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 14, color: '#111',
-          lineHeight: 1.6, marginBottom: 28, maxWidth: 520 }}>
+          margin: '0 0 8px', color: '#283F1A' }}>Print safe area</h3>
+        <p style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 14, color: '#283F1A',
+          lineHeight: 1.4, marginBottom: 28, maxWidth: 520 }}>
           For any printed document using the brand identity, always set up bleed and safe area
           zones in your layout application before placing artwork.
         </p>
@@ -84,30 +84,30 @@ export default function PrintSpecs() {
             style={{ display: "block", flexShrink: 0, fontFamily: `var(--body-font, 'Inter'), sans-serif` }}>
             {/* Bleed */}
             <rect x="8" y="8" width="264" height="194"
-              fill={`color-mix(in srgb, ${t['primary-blue']} 7%, white)`}
-              stroke={t['primary-blue']} strokeWidth="1" strokeDasharray="5,3" />
+              fill={`color-mix(in srgb, ${t['brand-accent']} 7%, white)`}
+              stroke={t['brand-accent']} strokeWidth="1" strokeDasharray="5,3" />
             {/* Trim */}
             <rect x="20" y="20" width="240" height="170"
               fill="white" stroke="#AAAAAA" strokeWidth="1" />
             {/* Safe */}
             <rect x="34" y="34" width="212" height="142"
-              fill={`color-mix(in srgb, ${t['primary-blue']} 4%, white)`}
+              fill={`color-mix(in srgb, ${t['brand-accent']} 4%, white)`}
               stroke="#22C55E" strokeWidth="1" strokeDasharray="4,2" />
 
             {/* Labels */}
             <text x="140" y="17" textAnchor="middle" fontSize="8.5"
-              fill={t['primary-blue']} fontWeight="600">Bleed +3mm</text>
+              fill={t['brand-accent']} fontWeight="600">Bleed +3mm</text>
             <text x="140" y="30" textAnchor="middle" fontSize="8"
-              fill="#111">Trim edge</text>
+              fill="#283F1A">Trim edge</text>
             <text x="140" y="112" textAnchor="middle" fontSize="9"
               fill="#22C55E" fontWeight="600">Safe area</text>
             <text x="140" y="125" textAnchor="middle" fontSize="7.5"
-              fill="#111">Live text and logos stay inside</text>
+              fill="#283F1A">Live text and logos stay inside</text>
 
             {/* Dim: bleed arrow */}
-            <line x1="8" y1="205" x2="20" y2="205" stroke={t['primary-blue']} strokeWidth="0.75" />
+            <line x1="8" y1="205" x2="20" y2="205" stroke={t['brand-accent']} strokeWidth="0.75" />
             <text x="14" y="212" textAnchor="middle" fontSize="7"
-              fill={t['primary-blue']}>3mm</text>
+              fill={t['brand-accent']}>3mm</text>
             {/* Dim: safe arrow */}
             <line x1="20" y1="205" x2="34" y2="205" stroke="#22C55E" strokeWidth="0.75" />
             <text x="27" y="212" textAnchor="middle" fontSize="7"
@@ -116,7 +116,7 @@ export default function PrintSpecs() {
 
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             {[
-              { color: t['primary-blue'], dash: true,  label: 'Bleed edge: extend background to here (+3mm)' },
+              { color: t['brand-accent'], dash: true,  label: 'Bleed edge: extend background to here (+3mm)' },
               { color: '#AAAAAA',         dash: false, label: 'Trim edge: the final cut line' },
               { color: '#22C55E',         dash: true,  label: 'Safe area: keep all live content inside' },
             ].map(item => (
@@ -125,7 +125,7 @@ export default function PrintSpecs() {
                   <line x1="0" y1="5" x2="24" y2="5" stroke={item.color} strokeWidth="1.5"
                     strokeDasharray={item.dash ? "4,3" : undefined} />
                 </svg>
-                <div style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 12, color: "#111",
+                <div style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 12, color: "#283F1A",
                   lineHeight: 1.4 }}>{item.label}</div>
               </div>
             ))}
@@ -136,9 +136,9 @@ export default function PrintSpecs() {
       {/* PDF export */}
       <div style={{ borderTop: "1px solid #E5E5E5", paddingTop: 40 }}>
         <h3 style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontWeight: 500, fontSize: 17,
-          margin: '0 0 8px', color: '#111' }}>Export this brand book as PDF</h3>
-        <p style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 14, color: '#111',
-          lineHeight: 1.6, marginBottom: 24, maxWidth: 560 }}>
+          margin: '0 0 8px', color: '#283F1A' }}>Export this brand book as PDF</h3>
+        <p style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 14, color: '#283F1A',
+          lineHeight: 1.4, marginBottom: 24, maxWidth: 560 }}>
           Use the button below (or the sidebar Print button) to export the complete brand book
           as a PDF. All sections are included, each starting on a new page.
         </p>
@@ -160,12 +160,12 @@ export default function PrintSpecs() {
           Print full brand book
         </button>
 
-        <div style={{ background: "#F8F4FF", borderLeft: `3px solid ${t['primary-blue']}`,
+        <div style={{ background: "#FAF6F8", borderLeft: `3px solid ${t['brand-accent']}`,
           padding: "16px 20px", maxWidth: 560 }}>
           <div style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontSize: 13, fontWeight: 600,
-            color: t['primary-blue'], marginBottom: 6 }}>Browser tip</div>
-          <div style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 13, color: "#111",
-            lineHeight: 1.65 }}>
+            color: t['brand-accent'], marginBottom: 6 }}>Browser tip</div>
+          <div style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 13, color: "#283F1A",
+            lineHeight: 1.4 }}>
             In the print dialog, set <strong>Destination → Save as PDF</strong>, margins to
             <strong> None</strong>, and enable <strong>Background graphics</strong> to preserve
             brand colors. Use A4 paper size for best results.
