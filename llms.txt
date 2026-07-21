@@ -1,0 +1,34 @@
+# SPM Communications — Brand manual
+
+> Brand manual for SPM Communications. Prepared by Paper Tiger. Version 1.0, July 2026.
+
+This is an interactive brand book. The complete brand data is embedded in the page HTML as JSON-LD inside `<script type="application/ld+json">`. Fetch the page source and parse that tag to extract all brand tokens programmatically.
+
+## Colors
+
+Primary palette:
+  - Juniper: #283F1A
+  - Fern: #324625
+  - Cornflower: #A4C3FA
+  - Salt: #FCFBF0
+
+Secondary palette:
+  - Jam: #59173E
+  - Silk: #E1D7D0
+  - Honeydew: #D9DB8C
+
+## Typography
+
+- Display font: Urbanist
+- Body font: Urbanist
+- Google fallback: Futura
+- System fallback: Arial
+
+## Design tokens
+
+CSS custom properties: --lh-body, --charcoal, --juniper, --white, --page-bg, --brand-accent, --brand-accent-rgb, --dark-blue, --fern, --fern-rgb, --cornflower, --salt, --jam, --jam-rgb, --silk, --honeydew, --gray
+
+## How to extract brand data
+
+Fetch this page's HTML and locate `<script type="application/ld+json">`.
+The `additionalProperty` array contains all brand tokens keyed by `name`.
