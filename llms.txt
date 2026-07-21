@@ -7,12 +7,12 @@ This is an interactive brand book. The complete brand data is embedded in the pa
 ## Colors
 
 Primary palette:
-  - Juniper: #283F1A
   - Fern: #324625
   - Cornflower: #A4C3FA
   - Salt: #FCFBF0
 
 Secondary palette:
+  - Juniper: #283F1A
   - Jam: #59173E
   - Silk: #E1D7D0
   - Honeydew: #D9DB8C
