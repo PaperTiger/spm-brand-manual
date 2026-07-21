@@ -31,6 +31,7 @@ const SECTIONS: Record<string, React.LazyExoticComponent<() => React.ReactElemen
   'photo-dos':          lazy(() => import('./sections/photography/PhotoDos')),
   'symbols':            lazy(() => import('./sections/symbols/Symbols')),
   'pattern':            lazy(() => import('./sections/symbols/Pattern')),
+  'motion':             lazy(() => import('./sections/motion/Motion')),
   'logo-cobranding':    lazy(() => import('./sections/logo/Cobranding')),
   'dataviz-colors':     lazy(() => import('./sections/dataviz/DataVizColors')),
   'dataviz-charts':     lazy(() => import('./sections/dataviz/DataVizCharts')),

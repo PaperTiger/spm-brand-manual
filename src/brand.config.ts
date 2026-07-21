@@ -91,6 +91,7 @@ export interface BrandConfig {
     applications: string[]  // filenames in public/images/applications/
     pattern?: string[]      // filenames in public/images/pattern/
     symbols?: string[]      // filenames in public/images/symbols/
+    motion?: string[]       // filenames in public/motion/
   }
   nav: NavGroup[]
 }
@@ -273,6 +274,13 @@ const brand: BrandConfig = {
       'pattern-honeydew-fern.webp',
       'pattern-silk-fern.webp',
     ],
+    motion: [
+      'motion-top-1.mp4',
+      'motion-top-2.mp4',
+      'motion-col-1.mp4',
+      'motion-col-2.mp4',
+      'motion-col-3.mp4',
+    ],
     symbols: [
       'symbol-set-overview.webp',
       'symbols-core-fern.webp',
@@ -361,6 +369,10 @@ const brand: BrandConfig = {
         { label: 'Color sequence',   id: 'dataviz-colors' },
         { label: 'Chart guidelines', id: 'dataviz-charts' },
       ],
+    },
+    {
+      group: 'Motion',
+      items: [{ label: 'Motion', id: 'motion' }],
     },
     {
       group: 'Applications',

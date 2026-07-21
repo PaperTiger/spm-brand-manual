@@ -189,6 +189,20 @@ body.print-active .print-book-page { overflow: hidden; }
   .just-row > figure { margin-bottom: 32px; }
 }
 
+/* ── Motion columns ────────────────────────────────────────────────
+   Three portrait clips side by side, stacking on narrow screens. */
+.motion-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 900px) {
+  .motion-cols { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .motion-cols { grid-template-columns: 1fr; }
+}
+
 /* ── Section / page ────────────────────────────────────────────── */
 .page {
   padding: 20px 20px 48px;
