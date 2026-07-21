@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Original bitmap exports from Figma. The WebP conversions in
+# public/images/ are the versioned deliverable; these are the raw
+# inputs to `npm run convert-images` and are kept locally only.
+brand-source/images-original/
