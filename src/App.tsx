@@ -26,6 +26,7 @@ const SECTIONS: Record<string, React.LazyExoticComponent<() => React.ReactElemen
   'type-fallback':      lazy(() => import('./sections/typography/SystemFallback')),
   'type-oldstandard':   lazy(() => import('./sections/typography/OldStandard')),
   'type-pairing':       lazy(() => import('./sections/typography/TypePairing')),
+  'type-emphasis':      lazy(() => import('./sections/typography/TypeEmphasis')),
   'type-avoid':         lazy(() => import('./sections/typography/TypeAvoid')),
   'photo-dos':          lazy(() => import('./sections/photography/PhotoDos')),
   'symbols':            lazy(() => import('./sections/symbols/Symbols')),

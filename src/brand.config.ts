@@ -189,6 +189,12 @@ const brand: BrandConfig = {
     salt:               '#FCFBF0',
     jam:                '#59173E',
     'jam-rgb':          '89, 23, 62',
+    // Headline emphasis. #6CA0F0 is the blue drawn in the homepage comp, but
+    // it measures 2.55:1 on Salt and fails even the 3:1 large-text threshold,
+    // so it is documented rather than specified. `highlight` is the nearest
+    // step down the Cornflower pathway that clears AA for body copy (5.49:1).
+    highlight:          '#576784',
+    'highlight-as-drawn': '#6CA0F0',
     silk:               '#E1D7D0',
     honeydew:           '#D9DB8C',
     gray:               '#F3F3F3',
@@ -322,6 +328,7 @@ const brand: BrandConfig = {
         },
         { label: 'Old Standard TT',        id: 'type-oldstandard' },
         { label: "Pairing do's and don'ts", id: 'type-pairing' },
+        { label: 'Emphasis & highlight',    id: 'type-emphasis' },
         { label: 'Microsoft Office fallback', id: 'google-fallback' },
         { label: 'System fallback', id: 'type-fallback' },
         { label: 'What to avoid',   id: 'type-avoid' },
