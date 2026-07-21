@@ -64,9 +64,19 @@ export default function ColorSwatch({ color }: Props) {
       minHeight: 'clamp(200px, 25vw, 380px)',
       ...(color.hex.toLowerCase() === '#ffffff' ? { boxShadow: 'inset 0 0 0 1px #C8C8C8' } : {}),
     }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 24 }}>
-        <div style={{ width: 8, height: 8, borderRadius: '50%', background: textColor, flexShrink: 0 }} />
-        <span style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontSize: 16, fontWeight: 600, color: textColor, letterSpacing: '0.02em', lineHeight: 1 }}>{color.name}</span>
+      <div style={{ marginBottom: 24 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div style={{ width: 8, height: 8, borderRadius: '50%', background: textColor, flexShrink: 0 }} />
+          <span style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontSize: 16, fontWeight: 600, color: textColor, letterSpacing: '0.02em', lineHeight: 1 }}>{color.name}</span>
+        </div>
+        {color.note && (
+          <div style={{
+            fontFamily: `var(--body-font, 'Urbanist'), sans-serif`, fontSize: 12, fontWeight: 500,
+            lineHeight: 1.4, color: textColor, opacity: 0.85, marginTop: 10, paddingLeft: 18, maxWidth: 260,
+          }}>
+            {color.note}
+          </div>
+        )}
       </div>
       <div style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 11, color: textColor, display: 'grid', gridTemplateColumns: '14px 1fr', gap: '0 10px', lineHeight: 1.1, opacity: 0.92, fontWeight: 500 }}>
         <span>R</span><span>{r}</span>

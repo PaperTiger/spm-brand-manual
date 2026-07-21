@@ -4,9 +4,10 @@ const t = brand.tokens
 const SANS = `var(--display-font, 'Urbanist'), sans-serif`
 const SERIF = `'Old Standard TT', Georgia, serif`
 
-// A dedicated highlight blue (#6CA1F0), deeper and more saturated than
-// Cornflower. It exists only for this treatment.
+// #6CA1F0 on a light ground. On a dark ground it flips to Cornflower, which
+// is far brighter against Juniper, Fern or Jam than the deeper blue is.
 const HL = t.highlight
+const HL_DARK = t.cornflower
 
 /** Small Old Standard caption with its rule, as the homepage sets it. */
 function Eyebrow({ children }: { children: React.ReactNode }) {
@@ -22,15 +23,17 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 
 /** The headline, with the highlight applied to key phrases only. */
 function Statement({ size = 'clamp(22px, 3.4vw, 40px)', ground = t.salt }: { size?: string; ground?: string }) {
-  const ink = ground === t.salt ? t.juniper : t.salt
+  const onDark = ground !== t.salt
+  const ink = onDark ? t.salt : t.juniper
+  const hl = onDark ? HL_DARK : HL
   return (
     <div style={{
       fontFamily: SANS, fontWeight: 600, fontSize: size, letterSpacing: '-0.02em',
       lineHeight: 1.15, color: ink, textAlign: 'center', maxWidth: 900, margin: '0 auto',
     }}>
-      SPM is a strategy-led <span style={{ color: HL }}>PR agency</span> for{' '}
-      <span style={{ color: HL }}>consumer brands</span> &ndash; where cultural intelligence and{' '}
-      <span style={{ color: HL }}>AI visibility</span> drive business results.
+      SPM is a strategy-led <span style={{ color: hl }}>PR agency</span> for{' '}
+      <span style={{ color: hl }}>consumer brands</span> &ndash; where cultural intelligence and{' '}
+      <span style={{ color: hl }}>AI visibility</span> drive business results.
     </div>
   )
 }
@@ -64,7 +67,7 @@ export default function TypeEmphasis() {
         <ol style={{ fontFamily: SANS, fontWeight: 500, fontSize: 15, lineHeight: 1.4, color: '#333', maxWidth: 620, paddingLeft: 20, margin: 0 }}>
           <li><strong>Caption.</strong> Two or three words in Old Standard TT italic, followed by a hairline rule.</li>
           <li><strong>Headline.</strong> Urbanist 600 in Juniper, sentence case, centred.</li>
-          <li><strong>Highlight.</strong> Two or three short phrases in <code style={{ fontFamily: 'monospace' }}>#6CA1F0</code>. Never a whole clause.</li>
+          <li><strong>Highlight.</strong> Two or three short phrases in <code style={{ fontFamily: 'monospace' }}>#6CA1F0</code> on a light ground, Cornflower on a dark one. Never a whole clause.</li>
         </ol>
       </div>
 
@@ -77,8 +80,9 @@ export default function TypeEmphasis() {
           <Statement ground={t.juniper} size="clamp(20px, 2.8vw, 32px)" />
         </div>
         <p style={{ fontFamily: SANS, fontWeight: 500, fontSize: 12.5, lineHeight: 1.4, color: '#4D4D4D', margin: '10px 0 0' }}>
-          The treatment reverses cleanly: a Salt headline on Juniper, Fern, or Jam, with the same
-          highlight blue. This is where it reads strongest.
+          On a dark ground the highlight switches to <strong>Cornflower</strong>: a Salt headline
+          on Juniper, Fern, or Jam, with Cornflower carrying the key phrases. Cornflower is far
+          brighter here than the deeper blue used on light grounds.
         </p>
       </div>
 

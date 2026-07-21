@@ -9,11 +9,14 @@ const items: ExampleItem[] = [
   {
     src: 'symbols-core-fern.webp',
     ok: false,
+    // The exported artwork already has a cross drawn over it.
+    cross: false,
     caption: 'Use symbols that are not in the approved icon set, or redraw them in another style.',
   },
   {
     src: 'symbol-tiles-grid.webp',
     ok: false,
+    cross: false,
     caption: 'Use colour combinations that are not approved.',
   },
   {

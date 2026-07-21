@@ -3,6 +3,8 @@ export interface ColorToken {
   hex: string
   textColor: string
   outline?: string
+  /** Usage note rendered on the swatch. */
+  note?: string
 }
 
 export interface FontFace {
@@ -224,12 +226,13 @@ const brand: BrandConfig = {
   // despite carrying the logo.
   colors: {
     primary: [
-      { name: 'Juniper',    hex: '#283F1A', textColor: '#FCFBF0' },
       { name: 'Fern',       hex: '#324625', textColor: '#FCFBF0' },
       { name: 'Cornflower', hex: '#A4C3FA', textColor: '#283F1A' },
       { name: 'Salt',       hex: '#FCFBF0', textColor: '#283F1A', outline: '1px solid #E5E2D6' },
     ],
     secondary: [
+      { name: 'Juniper',  hex: '#283F1A', textColor: '#FCFBF0',
+        note: 'Type colour. Use for body copy and headlines, not as a fill.' },
       { name: 'Jam',      hex: '#59173E', textColor: '#FCFBF0' },
       { name: 'Silk',     hex: '#E1D7D0', textColor: '#283F1A' },
       { name: 'Honeydew', hex: '#D9DB8C', textColor: '#283F1A' },

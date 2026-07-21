@@ -196,17 +196,12 @@ body.print-active .print-book-page { overflow: hidden; }
   font-size: clamp(64px, 17vw, 232px);
   font-weight: 550;
   letter-spacing: var(--ts-display-xl-ls, -0.03em);
-  /* The scale's 100% leading is set for a single-font block. This lockup
-     stacks two faces at different sizes, and each line box carries internal
-     leading the ink never fills, so at 100% the optical gap measured ~31px
-     against a 159px cap.
-
-     0.85 is the floor. The serif "l" ascender on the second line rises into
-     the first, and the two clamps are not perfectly proportional across
-     their ranges, so the tightest point is around 480px rather than at an
-     endpoint: 0.82 overlaps there by 0.65px and 0.84 leaves only 1.08px.
-     0.85 keeps at least 1.9px clear at every width from 320 to 2560. */
-  line-height: 0.85;
+  /* 30% tighter than the 0.85 this replaced.
+     The binding constraint is not the serif's "l" ascender: that rises 92px
+     clear to the right of where "Brand" ends, so it overlaps harmlessly. What
+     matters is the x-height of "manua" against Brand's baseline, which still
+     holds 3.3px at the tightest viewport. */
+  line-height: 0.595;
 }
 
 /* "manual" — Old Standard TT italic. The serif track runs larger than its
@@ -217,7 +212,7 @@ body.print-active .print-book-page { overflow: hidden; }
   font-size: clamp(72px, 19vw, 260px);
   font-weight: 400;
   letter-spacing: -0.07em;
-  line-height: 0.85;
+  line-height: 0.595;
 }
 
 .cover-meta {

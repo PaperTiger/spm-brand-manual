@@ -13,6 +13,8 @@ export interface ExampleItem {
   ok?: boolean
   /** Columns to span on wide viewports. Defaults to 1. */
   span?: number
+  /** Set false where the artwork already carries its own cross. */
+  cross?: boolean
   alt?: string
 }
 
@@ -75,7 +77,7 @@ export default function ExampleGrid({ items, dir, minColumn = 260, aspect = '4 /
                 loading="lazy"
                 style={{ display: 'block', width: '100%', height: '100%', objectFit: fit }}
               />
-              {!isDo && <Cross />}
+              {!isDo && item.cross !== false && <Cross />}
             </div>
             <figcaption
               style={{
