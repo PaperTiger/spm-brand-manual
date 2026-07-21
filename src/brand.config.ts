@@ -276,6 +276,7 @@ const brand: BrandConfig = {
     ],
     motion: [
       'motion-top-1.mp4',
+      'motion-4.mp4',
       'motion-top-2.mp4',
       'motion-col-1.mp4',
       'motion-col-2.mp4',

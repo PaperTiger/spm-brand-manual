@@ -11,8 +11,10 @@ interface Clip {
   ar: number
 }
 
+// Display order, not filename order: motion-4 sits second.
 const TOP: Clip[] = [
   { src: 'motion-top-1.mp4', label: 'Symbols masking photography, landscape', ar: 1646 / 718 },
+  { src: 'motion-4.mp4',     label: 'Motion 4, landscape', ar: 2030 / 1080 },
   { src: 'motion-top-2.mp4', label: 'Symbol tiles scrolling, wide banner', ar: 2770 / 498 },
 ]
 
