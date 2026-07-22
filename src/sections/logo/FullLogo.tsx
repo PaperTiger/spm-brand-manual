@@ -41,7 +41,7 @@ export default function FullLogo() {
           <ClearspaceDiagram
             logoSrc={`${import.meta.env.BASE_URL}images/logos/logo-full-primary.svg`}
             logoAlt={`${brand.meta.client} clearspace`}
-            csX={34} logoMaxHeight={68}
+            capRatio={0.156250} maxWidth={218} vwCap={55}
             defLabel={`½ the height of the ${brand.meta.client} mark`}
           />
         </div>

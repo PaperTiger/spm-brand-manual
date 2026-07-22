@@ -48,7 +48,7 @@ export default function CompactLogo() {
           <ClearspaceDiagram
             logoSrc={`${B}images/logos/logo-compact-primary.svg`}
             logoAlt="Compact logo clearspace"
-            csX={40} logoMaxHeight={80}
+            capRatio={0.194509} maxWidth={206} vwCap={52}
             defLabel={`½ the height of the ${brand.meta.client} mark`}
           />
         </div>

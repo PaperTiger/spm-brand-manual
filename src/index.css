@@ -376,8 +376,9 @@ body.print-active .print-book-page { overflow: hidden; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px;
+  padding: clamp(16px, 4vw, 40px);
   width: 100%;
+  min-width: 0;          /* let the inline-block zone shrink instead of blowing out */
   box-sizing: border-box;
 }
 

@@ -41,7 +41,7 @@ export default function LogoMark() {
           <ClearspaceDiagram
             logoSrc={`${import.meta.env.BASE_URL}images/logos/logo-mark-primary.svg`}
             logoAlt="Logo mark clearspace"
-            csX={75} logoMaxHeight={150}
+            capRatio={0.500000} maxWidth={150} vwCap={36}
             defLabel={`½ the height of the ${brand.meta.client} mark`}
           />
         </div>
