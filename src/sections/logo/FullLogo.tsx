@@ -49,10 +49,10 @@ export default function FullLogo() {
         {/* Approved color combinations */}
         <div style={{ marginTop: 48, paddingTop: 0 }}>
           <h3 style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontWeight: 500, fontSize: 17, margin: '0 0 16px', color: '#283F1A' }}>Approved color combinations</h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 0 }}>
+          <div className="combo-grid-wide">
           {combos.map(c => (
-            <div key={c.label} style={{ background: c.bg, padding: '28px 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, aspectRatio: '4/3', justifyContent: 'center' }}>
-              <FullLogoSvg markFill={c.mark} wordmarkFill={c.wm} innerTextFill={c.inner} style={{ maxHeight: 40, width: 'auto' }} />
+            <div key={c.label} style={{ background: c.bg, boxShadow: c.bg === t.salt ? 'inset 0 0 0 1px #E5E2D6' : undefined, padding: '8%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6%', aspectRatio: '4/3', justifyContent: 'center' }}>
+              <FullLogoSvg markFill={c.mark} wordmarkFill={c.wm} innerTextFill={c.inner} style={{ width: '78%', maxWidth: 300, height: 'auto' }} />
               <span style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 10, fontWeight: 600, letterSpacing: '0.06em', color: c.lbl, textTransform: 'uppercase', opacity: 0.7 }}>{c.label}</span>
             </div>
           ))}

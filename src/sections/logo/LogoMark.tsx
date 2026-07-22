@@ -49,10 +49,10 @@ export default function LogoMark() {
         {/* Approved color combinations */}
         <div style={{ marginTop: 48, paddingTop: 0 }}>
           <h3 style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontWeight: 500, fontSize: 17, margin: '0 0 16px', color: '#283F1A' }}>Approved color combinations</h3>
-          <div style={{ display: 'grid', gridTemplateColumns: `repeat(${combos.length}, 1fr)`, gap: 0 }}>
+          <div className="combo-grid-square">
             {combos.map(c => (
-              <div key={c.label} style={{ background: c.bg, padding: '32px 16px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, justifyContent: 'center', aspectRatio: '1' }}>
-                <LogoMarkSvg markFill={c.mark} innerTextFill={c.inner} style={{ maxHeight: 80, width: 'auto' }} />
+              <div key={c.label} style={{ background: c.bg, boxShadow: c.bg === t.salt ? 'inset 0 0 0 1px #E5E2D6' : undefined, padding: '10%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8%', justifyContent: 'center', aspectRatio: '1' }}>
+                <LogoMarkSvg markFill={c.mark} innerTextFill={c.inner} style={{ width: '52%', maxWidth: 130, height: 'auto' }} />
                 <span style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 10, fontWeight: 600, letterSpacing: '0.06em', color: c.lbl, textTransform: 'uppercase', opacity: 0.7 }}>{c.label}</span>
               </div>
             ))}

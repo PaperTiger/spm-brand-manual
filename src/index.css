@@ -203,6 +203,18 @@ body.print-active .print-book-page { overflow: hidden; }
   .motion-cols { grid-template-columns: 1fr; }
 }
 
+/* ── Approved-combination grids ────────────────────────────────────
+   Six panels, so the column count is held to a divisor of six (1/2/3/6)
+   at every breakpoint. auto-fit would happily land on 5 and leave an
+   orphan on the second row. */
+.combo-grid-wide   { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+.combo-grid-square { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0; }
+
+@media (max-width: 1100px) { .combo-grid-square { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 900px)  { .combo-grid-wide   { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 620px)  { .combo-grid-square { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px)  { .combo-grid-wide   { grid-template-columns: 1fr; } }
+
 /* ── Section / page ────────────────────────────────────────────── */
 .page {
   padding: 20px 20px 48px;
