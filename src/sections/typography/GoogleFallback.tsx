@@ -76,11 +76,11 @@ export default function GoogleFallback() {
           <div style={{ fontFamily: `var(--body-font, 'Urbanist'), sans-serif`, fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--brand-accent)', marginBottom: 14 }}>
             Sans &middot; replaces {displayFont}
           </div>
-          <div style={{ fontFamily: `'${gf}', 'Century Gothic', 'Avenir Next', sans-serif`, fontWeight: 500, fontSize: 'clamp(28px,3.6vw,44px)', lineHeight: 1, letterSpacing: '-0.03em', color: 'var(--charcoal)' }}>
+          <div style={{ fontFamily: `'${gf}', 'Avenir Next', 'Futura', sans-serif`, fontWeight: 700, fontSize: 'clamp(28px,3.6vw,44px)', lineHeight: 1, letterSpacing: '-0.03em', color: 'var(--charcoal)' }}>
             Senior-led.
           </div>
           <div style={{ fontFamily: `var(--body-font, 'Urbanist'), sans-serif`, fontSize: 12, color: '#4D4D4D', marginTop: 14 }}>
-            {gf} Medium
+            {gf} Bold
           </div>
         </div>
         <div style={{ background: 'var(--salt, #FCFBF0)', border: '1px solid #E5E2D6', padding: '28px 24px' }}>

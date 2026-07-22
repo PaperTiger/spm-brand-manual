@@ -162,7 +162,7 @@ const brand: BrandConfig = {
     avoidText:        'SPM is a strategy-led PR agency for consumer brands.',
     avoidTextPart1:   'Kind words',
     avoidTextPart2:   'from our team.',
-    fallbackGoogle16: 'When members share their challenges and strategies with the community, everyone benefits from a richer pool of collective knowledge. When Urbanist is unavailable, Futura carries the same geometric character.',
+    fallbackGoogle16: 'When members share their challenges and strategies with the community, everyone benefits from a richer pool of collective knowledge. When Urbanist is unavailable, Century Gothic carries the same geometric character.',
     fallbackSystem16: 'When members share their challenges and strategies with the community, everyone benefits from a richer pool of collective knowledge. When neither the brand fonts nor the Microsoft Office fonts load, Arial keeps the page legible.',
   },
 
@@ -206,7 +206,9 @@ const brand: BrandConfig = {
     bodyFontUrl:        'https://fonts.google.com/specimen/Urbanist',
     // SPM's own fonts are Google Fonts, so the fallback tiers step down to the
     // Microsoft Office family first, then to pre-installed system faces.
-    googleFallbackFont: 'Futura',
+    // Century Gothic, not Futura: it ships with Microsoft Office, which is
+    // what this tier is for. Futura does not.
+    googleFallbackFont: 'Century Gothic',
     googleFallbackUrl:  'https://fonts.google.com/specimen/Urbanist',
     // Arial rather than Century Gothic: Century Gothic ships with Microsoft
     // Office, not with the operating system, so it belongs to the Office tier.

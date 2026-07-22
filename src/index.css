@@ -21,6 +21,20 @@
   src: url('@fontsource-variable/urbanist/files/urbanist-latin-wght-italic.woff2') format('woff2-variations');
 }
 
+/* Century Gothic, supplied for the Microsoft Office fallback specimen so the
+   page shows the real face rather than substituting a local grotesque. Only
+   the Regular weight was supplied, so the Bold shown in that section is
+   synthesised by the browser; Office users applying the fallback have the
+   full family and will get true Bold. */
+@font-face {
+  font-family: 'Century Gothic';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/century-gothic.woff') format('woff'),
+       url('/fonts/century-gothic.ttf') format('truetype');
+}
+
 /* ── Reset ─────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
 body {
