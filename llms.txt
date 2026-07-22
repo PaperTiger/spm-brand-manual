@@ -21,7 +21,7 @@ Secondary palette:
 
 - Display font: Urbanist
 - Body font: Urbanist
-- Google fallback: Futura
+- Google fallback: Century Gothic
 - System fallback: Arial
 
 ## Design tokens
