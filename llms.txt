@@ -1,6 +1,6 @@
 # SPM Communications — Brand manual
 
-> Brand manual for SPM Communications. Prepared by Paper Tiger. Version 1.0, July 2026.
+> Brand manual for SPM Communications. Prepared by Paper Tiger. Version 1.1, July 2026.
 
 This is an interactive brand book. The complete brand data is embedded in the page HTML as JSON-LD inside `<script type="application/ld+json">`. Fetch the page source and parse that tag to extract all brand tokens programmatically.
 
