@@ -81,13 +81,24 @@ export default function Pattern() {
   return (
     <div className="page">
       <div className="section-label">Symbols &amp; patterns</div>
-      <h2 className="section-title">Pattern &amp; texture</h2>
+      <h2 className="section-title">Pattern &amp; gradients</h2>
       <p className="section-intro">
         Pattern is how the brand fills space without adding noise. It comes from three places:
         the symbols tiled into a repeat, the logo shape softened with a noise gradient, and
         gradients built on Salt and Cornflower. Each one sits inside the approved colour
         pairings, so a pattern never introduces a combination the palette does not already allow.
       </p>
+
+      <div style={{ marginBottom: 40, display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+        <a href={`${base}images/pattern/gradients.zip`} download="spm-gradients.zip" className="dl-btn" style={{ marginRight: 0 }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download gradients
+        </a>
+        <a href={`${base}images/symbols/gradient-symbol.zip`} download="spm-gradient-symbols.zip" className="dl-btn-outline" style={{ marginRight: 0 }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download gradient symbols
+        </a>
+      </div>
 
       <Row items={has(ROW_ONE)} />
       <Row items={has(ROW_TWO)} />

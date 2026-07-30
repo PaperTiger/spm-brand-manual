@@ -137,7 +137,7 @@ const brand: BrandConfig = {
     nameLine1:        'Brand',
     nameLine2:        'manual',
     title:            'Brand manual',
-    version:          'Version 1.0',
+    version:          'Version 1.1',
     date:             'July 2026',
     preparedBy:       'Paper Tiger',
     sidebarLogoImage: `${import.meta.env.BASE_URL}images/logos/logo-full-primary.svg`,
@@ -363,7 +363,7 @@ const brand: BrandConfig = {
       group: 'Symbols & patterns',
       items: [
         { label: 'Brand symbols',   id: 'symbols' },
-        { label: 'Pattern & texture', id: 'pattern' },
+        { label: 'Pattern & gradients', id: 'pattern' },
       ],
     },
     {

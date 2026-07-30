@@ -39,12 +39,23 @@ export default function Symbols() {
       </p>
 
       {/* The approved set */}
-      <div style={{ background: t.salt, border: '1px solid #E5E2D6', padding: '48px 32px', marginBottom: 48 }}>
+      <div style={{ background: t.salt, border: '1px solid #E5E2D6', padding: '48px 32px', marginBottom: 24 }}>
         <img
-          src={`${B}images/symbols/symbol-set-overview.webp`}
+          src={`${B}images/symbols/symbols-1.webp`}
           alt="The five approved SPM symbols in Fern, and the same five set in approved colour tiles"
           style={{ display: 'block', width: '100%', maxWidth: 760, margin: '0 auto', height: 'auto' }}
         />
+      </div>
+
+      <div style={{ marginBottom: 48, display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+        <a href={`${B}images/symbols/symbols.zip`} download="spm-symbols.zip" className="dl-btn" style={{ marginRight: 0 }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download symbols
+        </a>
+        <a href={`${B}images/symbols/gradient-symbol.zip`} download="spm-gradient-symbols.zip" className="dl-btn-outline" style={{ marginRight: 0 }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download gradient symbols
+        </a>
       </div>
 
       <h3 style={{ fontFamily: SANS, fontWeight: 600, fontSize: 17, margin: '0 0 20px', color: 'var(--charcoal)' }}>

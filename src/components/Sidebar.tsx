@@ -20,10 +20,15 @@ function findActiveGroup(page: string): string | null {
   return null
 }
 
+// The first nav group stays open by default; everything else starts collapsed
+// so the sidebar opens on the introduction rather than the full outline.
+const PINNED_OPEN = brand.nav[0]?.group
+
 function initialCollapsed(page: string): Set<string> {
-  if (typeof window === 'undefined' || window.innerWidth > 768) return new Set()
   const active = findActiveGroup(page)
-  return new Set(brand.nav.map(g => g.group).filter(g => g !== active))
+  return new Set(
+    brand.nav.map(g => g.group).filter(g => g !== PINNED_OPEN && g !== active),
+  )
 }
 
 function findParentItem(page: string) {
@@ -45,9 +50,13 @@ export default function Sidebar({ currentPage, onNavigate, isOpen, onClose, onPr
   const hasLogo = !!brand.meta.sidebarLogoImage
 
   useEffect(() => {
+    const active = findActiveGroup(currentPage)
     if (window.innerWidth <= 768) {
-      const active = findActiveGroup(currentPage)
+      // Mobile keeps it tight: only the active group open.
       setCollapsed(new Set(brand.nav.map(g => g.group).filter(g => g !== active)))
+    } else if (active) {
+      // Desktop: reveal the group you navigated into, leave any you opened alone.
+      setCollapsed(prev => { const n = new Set(prev); n.delete(active); return n })
     }
     const parent = findParentItem(currentPage)
     if (parent) setExpandedItems(prev => { const n = new Set(prev); n.add(parent); return n })
