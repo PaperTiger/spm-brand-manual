@@ -48,12 +48,12 @@ const ROW_TWO: Example[] = [
 
 // The repeat works in any approved pairing. Order matches the stylesheet.
 const COLOURWAYS = [
-  { src: 'pattern-salt-tonal.webp',       label: 'Salt on Salt' },
-  { src: 'pattern-jam-cornflower.webp',   label: 'Cornflower on Jam' },
-  { src: 'pattern-fern-honeydew.webp',    label: 'Honeydew on Fern' },
-  { src: 'pattern-cornflower-fern.webp',  label: 'Fern on Cornflower' },
-  { src: 'pattern-honeydew-fern.webp',    label: 'Fern on Honeydew' },
-  { src: 'pattern-silk-fern.webp',        label: 'Fern on Silk' },
+  { src: 'pattern-fern-on-honeydew.webp',    label: 'Fern on Honeydew' },
+  { src: 'pattern-fern-on-cornflower.webp',  label: 'Fern on Cornflower' },
+  { src: 'pattern-honeydew-on-fern.webp',    label: 'Honeydew on Fern' },
+  { src: 'pattern-cornflower-on-jam.webp',   label: 'Cornflower on Jam' },
+  { src: 'pattern-fern-on-silk.webp',        label: 'Fern on Silk' },
+  { src: 'pattern-salt-on-cornflower.webp',  label: 'Salt on Cornflower' },
 ]
 
 function Row({ items }: { items: Example[] }) {
@@ -115,7 +115,7 @@ export default function Pattern() {
                   loading="lazy"
                   style={{ display: 'block', width: '100%', height: 'auto' }}
                 />
-                <figcaption style={{ fontFamily: SANS, fontWeight: 500, fontSize: 11, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#4D4D4D', margin: '8px 0 0' }}>
+                <figcaption style={{ fontFamily: SANS, fontWeight: 500, fontSize: 11, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#4D4D4D', margin: '8px 0 22px' }}>
                   {c.label}
                 </figcaption>
               </figure>

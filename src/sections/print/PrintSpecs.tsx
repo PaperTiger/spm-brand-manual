@@ -132,46 +132,6 @@ export default function PrintSpecs() {
           </div>
         </div>
       </div>
-
-      {/* PDF export */}
-      <div style={{ borderTop: "1px solid #E5E5E5", paddingTop: 40 }}>
-        <h3 style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontWeight: 500, fontSize: 17,
-          margin: '0 0 8px', color: '#283F1A' }}>Export this brand book as PDF</h3>
-        <p style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 14, color: '#283F1A',
-          lineHeight: 1.4, marginBottom: 24, maxWidth: 560 }}>
-          Use the button below (or the sidebar Print button) to export the complete brand book
-          as a PDF. All sections are included, each starting on a new page.
-        </p>
-        <button
-          onClick={() => (window as any).__brandBookPrint?.() ?? window.print()}
-          style={{
-            display: "inline-flex", alignItems: "center", gap: 9,
-            background: t['charcoal'], color: "#fff", border: "none", cursor: "pointer",
-            fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontSize: 13, fontWeight: 600,
-            letterSpacing: "0.06em", padding: "13px 22px", marginBottom: 28,
-          }}
-        >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="6 9 6 2 18 2 18 9"/>
-            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
-            <rect x="6" y="14" width="12" height="8"/>
-          </svg>
-          Print full brand book
-        </button>
-
-        <div style={{ background: "#FAF6F8", borderLeft: `3px solid ${t['brand-accent']}`,
-          padding: "16px 20px", maxWidth: 560 }}>
-          <div style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontSize: 13, fontWeight: 600,
-            color: t['brand-accent'], marginBottom: 6 }}>Browser tip</div>
-          <div style={{ fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 13, color: "#283F1A",
-            lineHeight: 1.4 }}>
-            In the print dialog, set <strong>Destination → Save as PDF</strong>, margins to
-            <strong> None</strong>, and enable <strong>Background graphics</strong> to preserve
-            brand colors. Use A4 paper size for best results.
-          </div>
-        </div>
-      </div>
     </div>
   )
 }
