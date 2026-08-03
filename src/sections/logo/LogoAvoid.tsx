@@ -56,15 +56,15 @@ export default function LogoAvoid() {
         The logo is supplied as final artwork. Don't redraw, re-space, or restyle it.
         These are the most common ways the identity gets weakened.
       </p>
-      <div className="avoid-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 0, border: "1px solid #E5E5E5" }}>
-        {items.map((item, i) => (
-          <div key={item.heading} style={{
-            borderRight: (i + 1) % 3 !== 0 ? "1px solid #E5E5E5" : undefined,
-            borderBottom: i < 3 ? "1px solid #E5E5E5" : undefined,
-          }}>
-            <div style={{ background: item.bg, height: 160, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", borderBottom: "1px solid #E5E5E5" }}>
+      {/* Cell dividers come from the 1px grid gap showing the container colour
+          through, not from per-cell borders: that stays correct at 3, 2, or 1
+          columns without the column count being hardcoded in two places. */}
+      <div className="avoid-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 1, background: "#E5E5E5", border: "1px solid #E5E5E5" }}>
+        {items.map(item => (
+          <div key={item.heading} style={{ background: "var(--page-bg, #FCFBF0)", minWidth: 0 }}>
+            <div className="avoid-demo" style={{ background: item.bg, height: 160, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", borderBottom: "1px solid #E5E5E5" }}>
               {item.isRetype
-                ? <span style={{ fontFamily: "Georgia, serif", fontSize: 24, fontWeight: 700, color: "#283F1A", letterSpacing: "-0.01em" }}>{brand.meta.client}</span>
+                ? <span className="avoid-retype" style={{ fontFamily: "Georgia, serif", fontSize: 24, fontWeight: 700, color: "#283F1A", letterSpacing: "-0.01em" }}>{brand.meta.client}</span>
                 : <FullLogoSvg
                     markFill={item.mark!} wordmarkFill={item.wm!} innerTextFill={item.inner!}
                     style={{ height: 44, width: "auto", ...item.svgStyle }}

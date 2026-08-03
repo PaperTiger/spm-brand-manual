@@ -104,22 +104,22 @@ export default function Cobranding() {
         </p>
         <div className="cobranding-clearspace-box" style={{ border: "1px solid #E5E5E5", padding: "48px 40px",
           display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
-          <div style={{ display: "flex", alignItems: "center" }}>
+          <div className="cb-cs-row" style={{ display: "flex", alignItems: "center" }}>
             <FullLogoSvg
               markFill={t.jam} wordmarkFill={t.jam} innerTextFill={t.cornflower}
               style={{ height: 44, width: "auto" }}
             />
-            <div style={{ width: csXpx, height: 44,
+            <div className="cb-cs-x" style={{ width: csXpx, height: 44,
               background: `color-mix(in srgb, ${t['brand-accent']} 12%, transparent)`,
-              display: "flex", alignItems: "center", justifyContent: "center" }}>
+              display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
               <span style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontSize: 10, fontWeight: 700,
                 color: t['brand-accent'], background: "rgba(255,255,255,0.85)",
                 padding: "1px 5px", borderRadius: 2 }}>x</span>
             </div>
-            <div style={{ width: 1, height: 52, background: "#C4C4C4", flexShrink: 0 }} />
-            <div style={{ width: csXpx, height: 44,
+            <div className="cb-cs-rule" style={{ width: 1, height: 52, background: "#C4C4C4", flexShrink: 0 }} />
+            <div className="cb-cs-x" style={{ width: csXpx, height: 44,
               background: `color-mix(in srgb, ${t['brand-accent']} 12%, transparent)`,
-              display: "flex", alignItems: "center", justifyContent: "center" }}>
+              display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
               <span style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontSize: 10, fontWeight: 700,
                 color: t['brand-accent'], background: "rgba(255,255,255,0.85)",
                 padding: "1px 5px", borderRadius: 2 }}>x</span>
@@ -179,12 +179,14 @@ export default function Cobranding() {
       <div className="content-block">
         <h3 style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontWeight: 500, fontSize: 17,
           margin: '0 0 24px', color: '#283F1A' }}>What to avoid</h3>
+        {/* Dividers come from the 1px grid gap, so they stay correct however
+            many columns the breakpoint gives us. */}
         <div className="cobranding-avoid-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)",
-          gap: 0, border: "1px solid #E5E5E5" }}>
-          {avoidItems.map((item, i) => (
+          gap: 1, background: "#E5E5E5", border: "1px solid #E5E5E5" }}>
+          {avoidItems.map(item => (
             <div key={item.heading} style={{
-              borderRight: (i + 1) % 3 !== 0 ? "1px solid #E5E5E5" : undefined,
-              borderBottom: i < 3 ? "1px solid #E5E5E5" : undefined,
+              background: "var(--page-bg, #FCFBF0)",
+              minWidth: 0,
               padding: "20px 22px",
             }}>
               <div style={{ fontFamily: `var(--display-font, 'DM Sans'), sans-serif`, fontSize: 11, fontWeight: 700,

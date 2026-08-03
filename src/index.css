@@ -940,16 +940,9 @@ body.print-active .print-book-page { overflow: hidden; }
     max-width: 180px !important;
   }
 
-  /* Logo avoid: 3-col → 2-col; min-width: 0 so SVGs don't force cell expansion */
+  /* Logo avoid: 3-col → 2-col. Dividers are grid gaps, so no border patching. */
   .avoid-grid {
     grid-template-columns: repeat(2, 1fr) !important;
-  }
-  .avoid-grid > * {
-    min-width: 0;
-    border-right: none;
-  }
-  .avoid-grid > *:nth-child(odd) {
-    border-right: 1px solid #E5E5E5 !important;
   }
 
   /* Print specs: stack Print/Digital table; wrap safe-area diagram */
@@ -969,7 +962,7 @@ body.print-active .print-book-page { overflow: hidden; }
     height: auto !important;
   }
 
-  /* Cobranding: stack lockup pairs, clip clearspace diagram, 2-col avoid list */
+  /* Cobranding: stack lockup pairs, shrink clearspace diagram, 2-col avoid list */
   .cobranding-pair-grid {
     grid-template-columns: 1fr !important;
     max-width: 100% !important;
@@ -979,13 +972,39 @@ body.print-active .print-book-page { overflow: hidden; }
     overflow: hidden;
   }
   .cobranding-clearspace-box {
-    padding: 24px 16px !important;
-    overflow: hidden;
+    padding: 24px 12px !important;
+  }
+  /* Scale the whole diagram down rather than clipping it: at desktop sizes the
+     row is ~384px wide and a phone gives it ~310px, so `overflow: hidden` was
+     cutting the mark off one end and the partner logo off the other. */
+  .cb-cs-row svg {
+    height: 30px !important;
+    width: auto !important;
+  }
+  .cb-cs-x {
+    width: 24px !important;
+    height: 30px !important;
+  }
+  .cb-cs-rule {
+    height: 38px !important;
   }
   .cobranding-avoid-grid {
     grid-template-columns: repeat(2, 1fr) !important;
   }
-  .cobranding-avoid-grid > * {
-    min-width: 0;
+}
+
+/* Phones: the logo demos need the full column width to read at all. At two
+   columns a 375px screen leaves ~166px per cell, which clipped the stretched
+   lockup and cut "SPM Communications" off at both ends. */
+@media (max-width: 600px) {
+  .avoid-grid,
+  .cobranding-avoid-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .avoid-demo {
+    height: 140px !important;
+  }
+  .avoid-retype {
+    font-size: 20px !important;
   }
 }
