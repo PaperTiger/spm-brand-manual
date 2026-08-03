@@ -59,7 +59,7 @@ export default function LogoAvoid() {
       {/* Cell dividers come from the 1px grid gap showing the container colour
           through, not from per-cell borders: that stays correct at 3, 2, or 1
           columns without the column count being hardcoded in two places. */}
-      <div className="avoid-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 1, background: "#E5E5E5", border: "1px solid #E5E5E5" }}>
+      <div className="avoid-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 1, background: "#E5E5E5", border: "1px solid #E5E5E5" }}>
         {items.map(item => (
           <div key={item.heading} style={{ background: "var(--page-bg, #FCFBF0)", minWidth: 0 }}>
             <div className="avoid-demo" style={{ background: item.bg, height: 160, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", borderBottom: "1px solid #E5E5E5" }}>

@@ -155,7 +155,10 @@ export default function ColorPathways() {
                     fontFamily: `var(--body-font, 'Inter'), sans-serif`, fontSize: 8.5,
                     color: 'rgba(0,0,0,0.32)', letterSpacing: '0.01em',
                     borderTop: '1px solid rgba(0,0,0,0.07)',
-                    whiteSpace: 'nowrap' as const, overflow: 'hidden',
+                    // Token names are longer than their column at narrow widths.
+                    // nowrap + overflow: hidden silently chopped them mid-word
+                    // ("cornflower-9"), which then baked into PDF captures.
+                    minWidth: 0, overflowWrap: 'anywhere' as const,
                   }}>
                     {slug}-{label}
                   </div>

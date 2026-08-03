@@ -61,7 +61,7 @@ export default function Cobranding() {
       </p>
 
       {/* Approved lockups */}
-      <div className="cobranding-pair-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2, marginBottom: 2 }}>
+      <div className="cobranding-pair-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 2, marginBottom: 2 }}>
         <div style={{ background: "#F8F8F8", padding: "52px 40px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 28, marginBottom: 20 }}>
             <FullLogoSvg
@@ -145,7 +145,7 @@ export default function Cobranding() {
           The brand logo must be visually equal to or larger than the partner logo at all times.
           Never allow a partner logo to appear more prominent than the brand.
         </p>
-        <div className="cobranding-pair-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
+        <div className="cobranding-pair-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 2 }}>
           <div style={{ background: "#F8F8F8", padding: "28px 24px" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 20,
               marginBottom: 16, minHeight: 64 }}>
@@ -181,7 +181,7 @@ export default function Cobranding() {
           margin: '0 0 24px', color: '#283F1A' }}>What to avoid</h3>
         {/* Dividers come from the 1px grid gap, so they stay correct however
             many columns the breakpoint gives us. */}
-        <div className="cobranding-avoid-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)",
+        <div className="cobranding-avoid-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
           gap: 1, background: "#E5E5E5", border: "1px solid #E5E5E5" }}>
           {avoidItems.map(item => (
             <div key={item.heading} style={{

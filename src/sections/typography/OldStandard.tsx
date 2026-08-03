@@ -116,8 +116,13 @@ export default function OldStandard() {
                     <div style={{ fontFamily: SANS, fontSize: 11, color: '#4D4D4D' }}>
                       {s.name} · Old Standard TT Italic · {s.ls}
                     </div>
-                    <div style={{ fontFamily: SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: `clamp(14px, ${s.size}, ${s.size})`, letterSpacing: s.ls, lineHeight: 1, color: 'var(--charcoal)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      Boutique fast.
+                    {/* Capped against its own column, not clipped: "Boutique fast."
+                        runs ~5x its font size wide, so the 166px sample overflowed
+                        even at the 1440px capture width and lost its tail. */}
+                    <div style={{ containerType: 'inline-size', minWidth: 0 }}>
+                      <div style={{ fontFamily: SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: `min(${s.size}, 19cqi)`, letterSpacing: s.ls, lineHeight: 1, color: 'var(--charcoal)', whiteSpace: 'nowrap' }}>
+                        Boutique fast.
+                      </div>
                     </div>
                   </div>
                 )
@@ -132,8 +137,8 @@ export default function OldStandard() {
             Character set
           </h3>
           <div style={{ background: t.salt, border: '1px solid #E5E2D6', padding: '32px 28px', containerType: 'inline-size' }}>
-            <div style={{ fontFamily: SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: 'clamp(16px, 5.4cqi, 38px)', lineHeight: 1.4, color: t.fern }}>ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
-            <div style={{ fontFamily: SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: 'clamp(16px, 5.4cqi, 38px)', lineHeight: 1.4, color: t.fern }}>abcdefghijklmnopqrstuvwxyz</div>
+            <div style={{ fontFamily: SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: 'clamp(16px, 5.2cqi, 38px)', lineHeight: 1.4, color: t.fern }}>ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+            <div style={{ fontFamily: SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: 'clamp(16px, 5.2cqi, 38px)', lineHeight: 1.4, color: t.fern }}>abcdefghijklmnopqrstuvwxyz</div>
             <div style={{ fontFamily: SERIF, fontStyle: 'italic', fontWeight: 400, fontSize: 'clamp(13px, 4.4cqi, 30px)', lineHeight: 1.4, color: t.fern }}>1234567890 !@#$%&amp;*.,;:/?</div>
           </div>
         </div>

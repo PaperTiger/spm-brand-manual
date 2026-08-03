@@ -8,6 +8,8 @@ interface Props {
   onClose: () => void
   onPrint?: () => void
   pdfGenerating?: boolean
+  onDownloadBook?: () => void
+  bookGenerating?: boolean
 }
 
 function findActiveGroup(page: string): string | null {
@@ -40,7 +42,9 @@ function findParentItem(page: string) {
   return null
 }
 
-export default function Sidebar({ currentPage, onNavigate, isOpen, onClose, onPrint, pdfGenerating }: Props) {
+export default function Sidebar({ currentPage, onNavigate, isOpen, onClose, onPrint, pdfGenerating, onDownloadBook, bookGenerating }: Props) {
+  // One export at a time: either running disables both buttons.
+  const busy = !!pdfGenerating || !!bookGenerating
   const [collapsed, setCollapsed] = useState<Set<string>>(() => initialCollapsed(currentPage))
   const [expandedItems, setExpandedItems] = useState<Set<string>>(() => {
     const parent = findParentItem(currentPage)
@@ -156,8 +160,8 @@ export default function Sidebar({ currentPage, onNavigate, isOpen, onClose, onPr
         <button
           className="sidebar-print-btn"
           onClick={() => onPrint?.()}
-          disabled={pdfGenerating}
-          style={{ opacity: pdfGenerating ? 0.5 : undefined, cursor: pdfGenerating ? 'default' : undefined }}
+          disabled={busy}
+          style={{ opacity: busy ? 0.5 : undefined, cursor: busy ? 'default' : undefined }}
         >
           {pdfGenerating ? (
             <>
@@ -177,7 +181,35 @@ export default function Sidebar({ currentPage, onNavigate, isOpen, onClose, onPr
                 <polyline points="7 10 12 15 17 10"/>
                 <line x1="12" y1="15" x2="12" y2="3"/>
               </svg>
-              Download PDF
+              Download this page
+            </>
+          )}
+        </button>
+
+        <button
+          className="sidebar-print-btn sidebar-book-btn"
+          onClick={() => onDownloadBook?.()}
+          disabled={busy}
+          style={{ opacity: busy ? 0.5 : undefined, cursor: busy ? 'default' : undefined }}
+        >
+          {bookGenerating ? (
+            <>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                style={{ animation: 'spin 1s linear infinite' }}>
+                <circle cx="12" cy="12" r="10" strokeOpacity="0.25"/>
+                <path d="M12 2a10 10 0 0 1 10 10"/>
+              </svg>
+              Building…
+            </>
+          ) : (
+            <>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+              Download full book
             </>
           )}
         </button>

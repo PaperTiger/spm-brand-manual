@@ -207,11 +207,11 @@ body.print-active .print-book-page { overflow: hidden; }
    Three portrait clips side by side, stacking on narrow screens. */
 .motion-cols {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
 }
 @media (max-width: 900px) {
-  .motion-cols { grid-template-columns: repeat(2, 1fr); }
+  .motion-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 600px) {
   .motion-cols { grid-template-columns: 1fr; }
@@ -221,12 +221,12 @@ body.print-active .print-book-page { overflow: hidden; }
    Six panels, so the column count is held to a divisor of six (1/2/3/6)
    at every breakpoint. auto-fit would happily land on 5 and leave an
    orphan on the second row. */
-.combo-grid-wide   { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
-.combo-grid-square { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0; }
+.combo-grid-wide   { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
+.combo-grid-square { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; }
 
-@media (max-width: 1100px) { .combo-grid-square { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 900px)  { .combo-grid-wide   { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 620px)  { .combo-grid-square { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 1100px) { .combo-grid-square { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 900px)  { .combo-grid-wide   { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px)  { .combo-grid-square { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px)  { .combo-grid-wide   { grid-template-columns: 1fr; } }
 
 /* ── Section / page ────────────────────────────────────────────── */
@@ -331,14 +331,14 @@ body.print-active .print-book-page { overflow: hidden; }
   display: grid;
   gap: 0;
 }
-.palette-grid--primary   { grid-template-columns: repeat(2, 1fr); }
-.palette-grid--secondary { grid-template-columns: repeat(4, 1fr); }
-.combos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+.palette-grid--primary   { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.palette-grid--secondary { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.combos-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
 
 @media (max-width: 768px) {
   .palette-grid--primary   { grid-template-columns: 1fr; }
   .palette-grid--secondary { grid-template-columns: 1fr; }
-  .combos-grid { grid-template-columns: repeat(2, 1fr); }
+  .combos-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .sidebar-print-footer { display: none !important; }
 }
 
@@ -796,6 +796,124 @@ body.print-active .print-book-page { overflow: hidden; }
   color: var(--brand-accent, #59173E);
 }
 
+/* Primary of the two exports: the whole book as one document. */
+.sidebar-book-btn {
+  margin-top: 8px;
+  background: var(--charcoal, #283F1A);
+  border-color: var(--charcoal, #283F1A);
+  color: #fff;
+}
+.sidebar-book-btn:hover {
+  background: var(--brand-accent, #59173E);
+  border-color: var(--brand-accent, #59173E);
+  color: #fff;
+}
+
+/* ── Print book route (?print=1) ───────────────────────────────── */
+/* Rules are NOT scoped to @media print: the generator emulates *screen* media
+   so the PDF matches the live site, and relies on these break hints, which
+   Chrome honours during pagination regardless of emulated media type. */
+.print-book { background: #fff; }
+
+.print-book-page {
+  break-after: page;
+  page-break-after: always;   /* legacy alias, harmless and wider support */
+  display: block;
+}
+.print-book-page:last-child {
+  break-after: auto;
+  page-break-after: auto;
+}
+
+/* Never let Chrome slice through a swatch, diagram, or specimen row mid-element
+   — the failure that made the client-side sliced export unusable. */
+.print-book .swatch,
+.print-book .combo-cell,
+.print-book .cs-outer,
+.print-book .content-block,
+.print-book .specimen-row,
+.print-book .mark-combos-grid > div,
+.print-book .logo-combos-grid > div,
+.print-book .avoid-grid > *,
+.print-book .cobranding-avoid-grid > *,
+.print-book .just-row figure,
+.print-book .app-grid figure {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* Cobranding lockup cells must be allowed to shrink at every width, not just
+   mobile: their min-content width otherwise pushes the 2-col grid past the
+   container and the right edge gets clipped in PDF captures. */
+.cobranding-pair-grid > * { min-width: 0; }
+
+/* Applied to <body> for the duration of any PDF capture. Uses a body class
+   rather than inline styles because React remounts .page-nav as pages change
+   during a full-book export, which would discard inline styles. */
+body.pdf-exporting .sidebar,
+body.pdf-exporting .mobile-header,
+body.pdf-exporting .sidebar-overlay,
+body.pdf-exporting .page-nav {
+  display: none !important;
+}
+body.pdf-exporting .main {
+  margin-left: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* ── Full-book export progress ─────────────────────────────────── */
+.book-export-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(252, 251, 240, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.book-export-card {
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+}
+
+.book-export-title {
+  font-family: var(--display-font, 'Urbanist'), sans-serif;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--charcoal, #283F1A);
+  margin-bottom: 8px;
+}
+
+.book-export-step {
+  font-family: var(--body-font, 'Urbanist'), sans-serif;
+  font-size: 14px;
+  color: #4D4D4D;
+  margin-bottom: 20px;
+}
+
+.book-export-track {
+  height: 4px;
+  background: #E5E5E5;
+  overflow: hidden;
+}
+
+.book-export-fill {
+  height: 100%;
+  background: var(--brand-accent, #59173E);
+  transition: width 0.3s ease;
+}
+
+.book-export-note {
+  font-family: var(--body-font, 'Urbanist'), sans-serif;
+  font-size: 11px;
+  color: #888;
+  margin-top: 14px;
+}
+
 /* ── Print / PDF export ────────────────────────────────────────── */
 @media print {
   @page { size: landscape; margin: 0; }
@@ -942,7 +1060,7 @@ body.print-active .print-book-page { overflow: hidden; }
 
   /* Logo avoid: 3-col → 2-col. Dividers are grid gaps, so no border patching. */
   .avoid-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 
   /* Print specs: stack Print/Digital table; wrap safe-area diagram */
@@ -989,7 +1107,7 @@ body.print-active .print-book-page { overflow: hidden; }
     height: 38px !important;
   }
   .cobranding-avoid-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
 

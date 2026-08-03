@@ -2,43 +2,15 @@ import { lazy, Suspense, useEffect, useState } from 'react'
 import Sidebar from './components/Sidebar'
 import PageNav from './components/PageNav'
 import brand from './brand.config'
+import { BOOK_PAGES } from './pageList'
+import { SECTIONS, SECTION_IMPORTERS } from './sections'
+import { exportCurrentPage, exportFullBook } from './pdfExport'
 
-const SECTIONS: Record<string, React.LazyExoticComponent<() => React.ReactElement>> = {
-  home:                 lazy(() => import('./sections/home/Cover')),
-  'vi-intro':           lazy(() => import('./sections/home/ViIntro')),
-  'logo-horizontal':    lazy(() => import('./sections/logo/FullLogo')),
-  'logo-compact':       lazy(() => import('./sections/logo/CompactLogo')),
-  'h-logo-mark':        lazy(() => import('./sections/logo/LogoMark')),
-  'logo-avatar':        lazy(() => import('./sections/logo/LogoAvatar')),
-  'logo-positioning':   lazy(() => import('./sections/logo/LogoPositioning')),
-  'logo-avoid':         lazy(() => import('./sections/logo/LogoAvoid')),
-  'color-intro':        lazy(() => import('./sections/color/ColorIntro')),
-  'primary-palette':    lazy(() => import('./sections/color/PrimaryPalette')),
-  'secondary-palette':  lazy(() => import('./sections/color/SecondaryPalette')),
-  'color-combinations': lazy(() => import('./sections/color/ColorCombinations')),
-  'color-pathways':     lazy(() => import('./sections/color/ColorPathways')),
-  'type-intro':         lazy(() => import('./sections/typography/TypeIntro')),
-  'fg-overview':        lazy(() => import('./sections/typography/TypeOverview')),
-  'fg-usage':           lazy(() => import('./sections/typography/TypeUsage')),
-  'fg-specimen':        lazy(() => import('./sections/typography/TypeSpecimen')),
-  'fg-scale':           lazy(() => import('./sections/typography/TypeScale')),
-  'google-fallback':    lazy(() => import('./sections/typography/GoogleFallback')),
-  'type-fallback':      lazy(() => import('./sections/typography/SystemFallback')),
-  'type-oldstandard':   lazy(() => import('./sections/typography/OldStandard')),
-  'type-pairing':       lazy(() => import('./sections/typography/TypePairing')),
-  'type-emphasis':      lazy(() => import('./sections/typography/TypeEmphasis')),
-  'type-avoid':         lazy(() => import('./sections/typography/TypeAvoid')),
-  'photo-dos':          lazy(() => import('./sections/photography/PhotoDos')),
-  'symbols':            lazy(() => import('./sections/symbols/Symbols')),
-  'pattern':            lazy(() => import('./sections/symbols/Pattern')),
-  'motion':             lazy(() => import('./sections/motion/Motion')),
-  'logo-cobranding':    lazy(() => import('./sections/logo/Cobranding')),
-  'dataviz-colors':     lazy(() => import('./sections/dataviz/DataVizColors')),
-  'dataviz-charts':     lazy(() => import('./sections/dataviz/DataVizCharts')),
-  'app-intro':          lazy(() => import('./sections/applications/AppIntro')),
-  'app-examples':       lazy(() => import('./sections/applications/AppExamples')),
-  'print-specs':        lazy(() => import('./sections/print/PrintSpecs')),
-}
+const PrintBook = lazy(() => import('./PrintBook'))
+
+/** `?print=1` renders every section stacked for the build-time PDF generator. */
+const IS_PRINT_ROUTE = typeof window !== 'undefined'
+  && new URLSearchParams(window.location.search).get('print') === '1'
 
 
 function hexLuminance(hex: string): number {
@@ -122,6 +94,9 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState(() => window.location.hash.slice(1) || 'home')
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [pdfGenerating, setPdfGenerating] = useState(false)
+  const [bookProgress, setBookProgress] = useState<
+    { done: number; total: number; label: string } | null
+  >(null)
 
   const navigate = (id: string) => {
     setCurrentPage(id)
@@ -136,71 +111,58 @@ export default function App() {
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
 
+  const slug = brand.meta.client.toLowerCase().replace(/\s+/g, '-')
+
   const handleDownloadPdf = async () => {
-    const main = document.querySelector<HTMLElement>('.main')
-    if (!main) return
     setPdfGenerating(true)
-
-    const sidebar  = document.querySelector<HTMLElement>('.sidebar')
-    const mHeader  = document.querySelector<HTMLElement>('.mobile-header')
-    const overlay  = document.querySelector<HTMLElement>('.sidebar-overlay')
-    const pageNavs = document.querySelectorAll<HTMLElement>('.page-nav')
-
-    const prevSidebarDisplay = sidebar?.style.display ?? ''
-    if (sidebar) sidebar.style.display = 'none'
-
-    const chrome = [mHeader, overlay].filter(Boolean) as HTMLElement[]
-    chrome.forEach(el => { el.style.visibility = 'hidden' })
-
-    const prevPageNavDisplays = Array.from(pageNavs).map(el => el.style.display)
-    pageNavs.forEach(el => { el.style.display = 'none' })
-
-    const prevMarginLeft = main.style.marginLeft
-    main.style.marginLeft = '0'
-
-    const origScrollY = window.scrollY
-    window.scrollTo(0, 0)
-
-    await new Promise<void>(r => requestAnimationFrame(() => requestAnimationFrame(() => r())))
-
     try {
-      const { toCanvas } = await import('html-to-image')
-      const { default: jsPDF } = await import('jspdf')
-
-      const captureW = main.offsetWidth
-      const captureH = main.scrollHeight
-
-      const canvas = await toCanvas(main, {
-        pixelRatio: 2,
-        width: captureW,
-        height: captureH,
-        backgroundColor: '#ffffff',
-      })
-
-      const pxToPt = 72 / 96
-      const pdfW = (canvas.width / 2) * pxToPt
-      const pdfH = (canvas.height / 2) * pxToPt
-
-      const pdf = new jsPDF({
-        orientation: pdfW > pdfH ? 'l' : 'p',
-        unit: 'pt',
-        format: [pdfW, pdfH],
-        compress: true,
-      })
-
-      pdf.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, pdfW, pdfH)
-      const slug = brand.meta.client.toLowerCase().replace(/\s+/g, '-')
-      pdf.save(`${slug}-${currentPage}.pdf`)
+      await exportCurrentPage(`${slug}-${currentPage}.pdf`)
     } catch (err) {
       console.error('PDF generation failed:', err)
       alert('PDF generation failed — see console for details.')
     } finally {
-      if (sidebar) sidebar.style.display = prevSidebarDisplay
-      chrome.forEach(el => { el.style.visibility = '' })
-      pageNavs.forEach((el, i) => { el.style.display = prevPageNavDisplays[i] })
-      main.style.marginLeft = prevMarginLeft
-      window.scrollTo(0, origScrollY)
       setPdfGenerating(false)
+    }
+  }
+
+  const handleDownloadBook = async () => {
+    // Prefer the build-time PDF: real vector text, native page heights, and no
+    // 90-second wait. Falls back to the in-browser export in dev, or if a build
+    // ran without Chromium available.
+    const prebuilt = `${import.meta.env.BASE_URL}brand-book.pdf`
+    try {
+      const head = await fetch(prebuilt, { method: 'HEAD' })
+      // The dev server answers unknown paths with index.html, so a 200 alone
+      // isn't proof — the content type has to actually be a PDF.
+      if (head.ok && (head.headers.get('content-type') ?? '').includes('pdf')) {
+        const a = document.createElement('a')
+        a.href = prebuilt
+        a.download = `${slug}-brand-book.pdf`
+        a.click()
+        return
+      }
+    } catch {
+      // Offline or blocked — fall through to generating it client-side.
+    }
+
+    const returnTo = currentPage
+    setBookProgress({ done: 0, total: BOOK_PAGES.length, label: 'Preparing…' })
+    try {
+      await exportFullBook({
+        pages: BOOK_PAGES,
+        // Drive rendering via state only — writing the hash 34 times would
+        // bury the user's real history under a stack of export steps.
+        goToPage: id => setCurrentPage(id),
+        preload: () => Promise.all(Object.values(SECTION_IMPORTERS).map(load => load())),
+        onProgress: (done, total, label) => setBookProgress({ done, total, label }),
+        fileName: `${slug}-brand-book.pdf`,
+      })
+    } catch (err) {
+      console.error('Full book PDF failed:', err)
+      alert('Full book PDF failed — see console for details.')
+    } finally {
+      setBookProgress(null)
+      setCurrentPage(returnTo)
     }
   }
 
@@ -216,6 +178,16 @@ export default function App() {
 
   const Section = SECTIONS[currentPage] ?? SECTIONS['home']
 
+  // Print route: no sidebar, no nav, no routing — just the whole book stacked
+  // so Chrome can paginate it. Returns before the normal layout entirely.
+  if (IS_PRINT_ROUTE) {
+    return (
+      <Suspense fallback={null}>
+        <PrintBook />
+      </Suspense>
+    )
+  }
+
   return (
     <div className="layout">
       <MobileHeader onOpen={() => setSidebarOpen(true)} onHome={() => navigate('home')} />
@@ -229,14 +201,36 @@ export default function App() {
         onClose={() => setSidebarOpen(false)}
         onPrint={handleDownloadPdf}
         pdfGenerating={pdfGenerating}
+        onDownloadBook={handleDownloadBook}
+        bookGenerating={bookProgress !== null}
       />
 
       <main className="main">
-        <Suspense fallback={<div style={{ padding: 64, fontFamily: `var(--body-font, 'Urbanist'), sans-serif`, color: 'var(--charcoal, #283F1A)' }}>Loading…</div>}>
+        <Suspense fallback={<div className="section-loading" style={{ padding: 64, fontFamily: `var(--body-font, 'Urbanist'), sans-serif`, color: 'var(--charcoal, #283F1A)' }}>Loading…</div>}>
           <Section />
         </Suspense>
         <PageNav currentPage={currentPage} onNavigate={navigate} />
       </main>
+
+      {bookProgress && <BookProgressOverlay {...bookProgress} />}
+    </div>
+  )
+}
+
+function BookProgressOverlay({ done, total, label }: { done: number; total: number; label: string }) {
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0
+  return (
+    <div className="book-export-overlay" role="status" aria-live="polite">
+      <div className="book-export-card">
+        <div className="book-export-title">Building your brand book</div>
+        <div className="book-export-step">
+          {done < total ? `Page ${Math.min(done + 1, total)} of ${total}` : `${total} of ${total}`} &middot; {label}
+        </div>
+        <div className="book-export-track">
+          <div className="book-export-fill" style={{ width: `${pct}%` }} />
+        </div>
+        <div className="book-export-note">This takes a minute. Please keep this tab open.</div>
+      </div>
     </div>
   )
 }
