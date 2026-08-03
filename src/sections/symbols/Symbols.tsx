@@ -32,7 +32,7 @@ export default function Symbols() {
       <h2 className="section-title">Brand symbols</h2>
       <p className="section-intro">
         Five symbols drawn from the brand's own typography: the comma from the logo mark,
-        an asterisk, a semicolon, an ampersand, and an equals sign. They are punctuation, not
+        an asterisk, a semicolon, an ampersand, and a hash. They are punctuation, not
         icons: they add rhythm and texture rather than carrying literal meaning. Use them as
         accents, tile them into patterns, or set them in rounded tiles using the approved
         colour pairings.

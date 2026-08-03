@@ -36,12 +36,12 @@ const EXAMPLES: Example[] = [
   {
     src: 'social-philz-cornflower.webp', lg: 6, md: 6,
     caption: 'use the symbols to frame photography.',
-    alt: 'Philz Coffee cups framed above and below by symbol tiles on Cornflower',
+    alt: 'Shipley Do-Nuts being shared, framed above and below by symbol tiles on Cornflower',
   },
   {
     src: 'social-dessert-honeydew.webp', lg: 6, md: 6,
     caption: 'use the symbols to frame photography.',
-    alt: 'A dessert framed above and below by symbol tiles on Honeydew',
+    alt: 'Three team members holding baked goods, framed above and below by symbol tiles on Honeydew',
   },
   {
     src: 'campaign-pair.webp', lg: 6, md: 12,
