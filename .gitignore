@@ -27,3 +27,6 @@ dist-ssr
 # public/images/ are the versioned deliverable; these are the raw
 # inputs to `npm run convert-images` and are kept locally only.
 brand-source/images-original/
+
+# Vite cache — the real one lives in node_modules/.vite; this root copy is an orphan
+.vite
