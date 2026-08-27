@@ -191,9 +191,10 @@ interface DonutDatum { label: string; pct: number; color: string }
 
 function DonutChart({ data, dark = false }: { data: DonutDatum[]; dark?: boolean }) {
   const size = 200, cx = 100, cy = 100, r = 86, ir = 48
-  let cum = 0
-  const segs = data.map(d => {
-    const start = cum; cum += d.pct
+  // Each segment starts where the preceding ones ended, derived rather than
+  // accumulated in a mutable running total.
+  const segs = data.map((d, i) => {
+    const start = data.slice(0, i).reduce((sum, prev) => sum + prev.pct, 0)
     return { ...d, path: donutSegment(cx, cy, r, ir, start, d.pct) }
   })
 

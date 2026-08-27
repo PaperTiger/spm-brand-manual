@@ -1,4 +1,5 @@
 import ExampleGrid, { type ExampleItem } from '../../components/ui/ExampleGrid'
+import brand from '../../brand.config'
 
 // Captions come straight from the stylesheet's photography panel.
 const items: ExampleItem[] = [
@@ -20,6 +21,11 @@ const items: ExampleItem[] = [
 ]
 
 export default function PhotoDos() {
+  // Same gate the motion, applications, and pattern sections use: a tile whose
+  // file is not in the config inventory is dropped rather than rendered broken.
+  const inventory = new Set(brand.images.photography)
+  const available = items.filter(i => inventory.has(i.src))
+
   return (
     <div className="page">
       <div className="section-label">Photography</div>
@@ -30,7 +36,7 @@ export default function PhotoDos() {
         actually gets done.
       </p>
 
-      <ExampleGrid items={items} dir="photography" minColumn={280} aspect="1 / 1" fit="cover" />
+      <ExampleGrid items={available} dir="photography" minColumn={280} aspect="1 / 1" fit="cover" />
     </div>
   )
 }

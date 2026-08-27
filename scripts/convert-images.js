@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Converts PNG/JPG images in public/images/{photography,applications,pattern,symbols}/
-// to WebP at max 1600px wide. Deletes the originals after conversion.
+// to WebP at max 2000px wide. Deletes the originals after conversion, so keep
+// masters outside public/.
 // Usage: node scripts/convert-images.js
 
 import sharp from 'sharp'
@@ -14,7 +15,10 @@ const root = join(__dirname, '..', 'public', 'images')
 
 const SOURCE_EXTS = new Set(['.jpg', '.jpeg', '.png'])
 const DIRS = ['photography', 'applications', 'pattern', 'symbols']
-const MAX_WIDTH = 1600
+// 2000, not 1600: the widest slot in the book is full content width (~940px),
+// which needs ~1880px to stay sharp on a 2x display. 1600 landed under that and
+// quietly softened the full-width application banner.
+const MAX_WIDTH = 2000
 
 async function convertDir(dir) {
   const files = await readdir(dir).catch(() => [])
