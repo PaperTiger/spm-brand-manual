@@ -2,10 +2,11 @@ import brand from '../../brand.config'
 
 const t = brand.tokens
 
-// The stylesheet does not specify a data visualisation palette. This sequence
-// extends the brand palette, ordered so that adjacent series stay separable:
-// it alternates dark and light rather than running the two darks together.
-// The brand palette, used straight, so a chart reads as SPM at a glance.
+// The stylesheet does not specify a data visualisation palette. This is the
+// brand palette used straight, so a chart reads as SPM at a glance, ordered so
+// that adjacent series stay separable: it alternates dark and light rather
+// than running the two darks together. Neutrals are deliberately absent — the
+// gridline and label greys live with the chart styles, not in the series.
 const sequence = [
   {
     n: '01', name: 'Jam', hex: '#59173E', text: '#FCFBF0',
@@ -27,11 +28,11 @@ const sequence = [
     n: '05', name: 'Silk', hex: '#E1D7D0', text: '#283F1A',
     note: 'Fifth series. Beyond five, use opacity steps of a single hue.',
   },
-  {
-    n: '06', name: 'Mid Gray', hex: '#9CA3AF', text: '#000',
-    note: 'Axes, gridlines, and reference lines only. Never a data series.',
-  },
 ]
+
+// Three columns, so the last row is rarely full: derive the dividers from the
+// item count instead of hardcoding a two-row grid.
+const lastRowStart = Math.floor((sequence.length - 1) / 3) * 3
 
 const rules = [
   {
@@ -43,8 +44,8 @@ const rules = [
     body: 'Limit each chart to five color-coded data series. For six or more, use opacity steps of a single hue (see sequential palette below).',
   },
   {
-    heading: 'Gray is for context, not data',
-    body: 'Gray tones serve axes, gridlines, and benchmark reference lines only. Never represent a primary data series in gray.',
+    heading: 'Neutrals are for context, not data',
+    body: 'Axes, gridlines, and benchmark reference lines use the chart neutrals — #E5E5E5 for gridlines, #4D4D4D for labels, specified with the chart styles. Never represent a data series in a neutral.',
   },
   {
     heading: 'Test for color accessibility',
@@ -67,8 +68,9 @@ export default function DataVizColors() {
         gap: 0, border: "1px solid #E5E5E5", marginBottom: 56 }}>
         {sequence.map((s, i) => (
           <div key={s.n} style={{
-            borderRight: (i + 1) % 3 !== 0 ? "1px solid #E5E5E5" : undefined,
-            borderBottom: i < 3 ? "1px solid #E5E5E5" : undefined,
+            borderRight: (i + 1) % 3 !== 0 && i !== sequence.length - 1
+              ? "1px solid #E5E5E5" : undefined,
+            borderBottom: i < lastRowStart ? "1px solid #E5E5E5" : undefined,
           }}>
             <div style={{ background: s.hex, height: 88, padding: "14px 18px",
               display: "flex", alignItems: "flex-start" }}>
