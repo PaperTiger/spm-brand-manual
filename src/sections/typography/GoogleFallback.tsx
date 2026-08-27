@@ -2,7 +2,7 @@ import brand from '../../brand.config'
 
 const { displayFont, googleFallbackFont } = brand.typography
 const gf = googleFallbackFont
-const serifFallback = brand.typography.officeSerifFallback ?? 'Baskerville'
+const serifFallback = brand.typography.officeSerifFallback ?? 'Garamond'
 const SERIF_FB = `'${serifFallback}', Georgia, serif`
 
 const rows = [

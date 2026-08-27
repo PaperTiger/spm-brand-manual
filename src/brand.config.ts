@@ -216,7 +216,7 @@ const brand: BrandConfig = {
     systemFallbackFont: 'Arial',
     // Old Standard TT is the accent face, so each fallback tier needs a serif
     // partner as well as a sans one.
-    officeSerifFallback: 'Baskerville',
+    officeSerifFallback: 'Garamond',
     systemSerifFallback: 'Times New Roman',
     fonts: [
       { family: 'Urbanist',        weight: '100 900', file: 'Google Fonts (variable)' },
