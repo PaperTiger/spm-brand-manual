@@ -2,10 +2,16 @@ import ExampleGrid, { type ExampleItem } from '../../components/ui/ExampleGrid'
 
 // Captions come straight from the stylesheet's photography panel.
 const items: ExampleItem[] = [
-  { src: 'client-philz-coffee.webp',   caption: 'Include bright photography.' },
-  { src: 'team-candid.webp',           caption: 'Capture authentic and warm expressions.' },
-  { src: 'portrait-headshot.webp',     caption: 'Mix in warm images of team members.' },
-  { src: 'food-dessert-honeydew.webp', caption: 'Use consistent lighting and grain effect.' },
+  {
+    src: 'bright-light.webp', caption: 'Include bright photography.',
+    alt: 'A plated chicken and roast squash dish shot in bright, even daylight',
+  },
+  { src: 'team-candid.webp',       caption: 'Capture authentic and warm expressions.' },
+  { src: 'portrait-headshot.webp', caption: 'Mix in warm images of team members.' },
+  {
+    src: 'consistent-grain.webp', caption: 'Use consistent lighting and grain effect.',
+    alt: 'Four dogs on turf, all carrying the same warm tone and grain',
+  },
   {
     src: 'grading-do-dont.webp',
     caption: 'Use warm / neutral colour toning consistently. Avoid a blue or yellow overcast.',

@@ -250,8 +250,9 @@ const brand: BrandConfig = {
     photography: [
       'portrait-headshot.webp',
       'team-candid.webp',
-      'client-philz-coffee.webp',
-      'food-dessert-honeydew.webp',
+      'bright-light.webp',
+      'consistent-grain.webp',
+      'grading-do-dont.webp',
     ],
     applications: [
       'social-philz-cornflower.webp',
