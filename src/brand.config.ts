@@ -1,6 +1,15 @@
 export interface ColorToken {
   name: string
   hex: string
+  /**
+   * Press build as [C, M, Y, K] percentages, written by `npm run convert-cmyk`.
+   * Converted from sRGB through a real ICC profile (US Web Coated SWOP v2,
+   * relative colorimetric, black point compensation), which is what a designer
+   * gets converting in Illustrator. Not derivable from the hex by formula: the
+   * naive RGB inversion produces builds no press matches. When absent, the UI
+   * falls back to the formula and marks the value as approximate.
+   */
+  cmyk?: [number, number, number, number]
   textColor: string
   outline?: string
   /** Usage note rendered on the swatch. */
@@ -229,18 +238,18 @@ const brand: BrandConfig = {
   // despite carrying the logo.
   colors: {
     primary: [
-      { name: 'Fern',       hex: '#324625', textColor: '#FCFBF0',
+      { name: 'Fern',       hex: '#324625', cmyk: [72, 48, 91, 51], textColor: '#FCFBF0',
         note: 'For type, use Juniper #283F1A: the darker version of this green.' },
-      { name: 'Cornflower', hex: '#A4C3FA', textColor: '#283F1A',
+      { name: 'Cornflower', hex: '#A4C3FA', cmyk: [32, 17, 0, 0], textColor: '#283F1A',
         note: 'For colour highlights in headlines, use #6CA1F0: a slightly darker Cornflower.' },
-      { name: 'Salt',       hex: '#FCFBF0', textColor: '#283F1A', outline: '1px solid #E5E2D6' },
+      { name: 'Salt',       hex: '#FCFBF0', cmyk: [1, 1, 5, 0], textColor: '#283F1A', outline: '1px solid #E5E2D6' },
     ],
     secondary: [
-      { name: 'Juniper',  hex: '#283F1A', textColor: '#FCFBF0',
+      { name: 'Juniper',  hex: '#283F1A', cmyk: [74, 49, 95, 56], textColor: '#FCFBF0',
         note: 'Type colour. Use for body copy and headlines, not as a fill.' },
-      { name: 'Jam',      hex: '#59173E', textColor: '#FCFBF0' },
-      { name: 'Silk',     hex: '#E1D7D0', textColor: '#283F1A' },
-      { name: 'Honeydew', hex: '#D9DB8C', textColor: '#283F1A' },
+      { name: 'Jam',      hex: '#59173E', cmyk: [52, 96, 47, 45], textColor: '#FCFBF0' },
+      { name: 'Silk',     hex: '#E1D7D0', cmyk: [10, 13, 15, 0], textColor: '#283F1A' },
+      { name: 'Honeydew', hex: '#D9DB8C', cmyk: [16, 5, 56, 0], textColor: '#283F1A' },
     ],
   },
 

@@ -14,7 +14,11 @@
     "build:nopdf": "tsc -b && vite build",
     "generate-pdf": "node scripts/generate-pdf.js",
     "verify-pdf": "node scripts/verify-pdf.js",
-    "postdeploy": "rm -rf dist"
+    "postdeploy": "rm -rf dist",
+    "convert-cmyk": "node scripts/convert-cmyk.js",
+    "prebuild": "node scripts/convert-cmyk.js --if-available",
+    "predev": "node scripts/convert-cmyk.js --if-available",
+    "prebuild:nopdf": "node scripts/convert-cmyk.js --if-available"
   },
   "dependencies": {
     "@fontsource-variable/urbanist": "^5.3.0",

@@ -6,7 +6,17 @@ function hexToRgb(hex: string): [number,number,number] {
   return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)]
 }
 
-function hexToCmyk(hex: string) {
+/**
+ * Last-resort CMYK when a colour has no measured build yet.
+ *
+ * This is the naive formula and it is wrong for print: it treats ink as
+ * inverted light, so it round-trips through its own inverse perfectly while
+ * describing a press that does not exist. RGB 116,251,215 comes out as
+ * C54 M0 Y14 K2 where the real build is C43 M0 Y29 K0.
+ *
+ * Run `npm run convert-cmyk` to replace these with a real ICC conversion.
+ */
+function approxCmyk(hex: string) {
   const [r,g,b] = hexToRgb(hex).map(v => v/255)
   const k = 1 - Math.max(r,g,b)
   if (k === 1) return [0,0,0,100]
@@ -43,7 +53,9 @@ interface Props {
 export default function ColorSwatch({ color }: Props) {
   const [copied, setCopied] = useState(false)
   const [r,g,b] = hexToRgb(color.hex)
-  const [c,m,y,k] = hexToCmyk(color.hex)
+  // Prefer the measured build. color.cmyk comes from a real profile conversion.
+  const measured = color.cmyk
+  const [c,m,y,k] = measured ?? approxCmyk(color.hex)
   const textColor = getBestTextColor(color.hex)
   const hexVal = color.hex.replace('#','').toUpperCase()
   const isLight = textColor === '#283F1A'
@@ -83,7 +95,7 @@ export default function ColorSwatch({ color }: Props) {
         <span>G</span><span>{g}</span>
         <span>B</span><span>{b}</span>
         <div style={{ gridColumn: '1/-1', height: 7 }} />
-        <span>C</span><span>{c}</span>
+        <span>C</span><span>{c}{!measured && <span style={{ opacity: 0.55 }}> approx.</span>}</span>
         <span>M</span><span>{m}</span>
         <span>Y</span><span>{y}</span>
         <span>K</span><span>{k}</span>
